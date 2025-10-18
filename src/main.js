@@ -6,6 +6,7 @@ import './assets/scss/global.scss'
 import './index.css'
 import BaseCard from './components/Base/BaseCard.vue'
 import BaseBtn from './components/Base/BaseBtn.vue'
+import Logo from './components/Base/Logo.vue'
 
 // perfectscrollbar plugins 
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
@@ -20,8 +21,11 @@ import VueApexCharts from "vue3-apexcharts";
 createApp(App)
     .component('BaseCard', BaseCard)
     .component('BaseBtn', BaseBtn)
+    .component('Logo',Logo)
     .use(PerfectScrollbar)
     .use(VueApexCharts)
     .use(store)
     .use(router)
     .mount('#app')
+
+    app.config.globalProperties.$request = request;

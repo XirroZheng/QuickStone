@@ -36,15 +36,11 @@ let handleWindowResize = () => {
 <template>
     <div class="side-content-wrap">
         <div class="side-content-wrap">
-            <div
-                :class="
-                    store.state.largeSidebar.sidebarToggleProperties
-                        .isSideNavOpen === true
-                        ? 'open'
-                        : ''
-                "
-                class="sidebar-left"
-            >
+            <div :class="store.state.largeSidebar.sidebarToggleProperties
+                .isSideNavOpen === true
+                ? 'open'
+                : ''
+                " class="sidebar-left">
                 <perfect-scrollbar>
                     <ul class="navigation-left">
                         <!-- <div 
@@ -54,31 +50,19 @@ let handleWindowResize = () => {
                             data-item="dashboards"
                             
                         ></div> -->
-                        <router-link
-                            to="/dashboards/dashboard-version-one"
-                            tag="li"
-                            class="nav-item"
-                        >
+                        <router-link to="/dashboards/dashboard-version-one" tag="li" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Home1 text-3xl"></i>
                                 <p>Dashboard</p>
                             </div>
                         </router-link>
-                        <router-link
-                            to="/components/button"
-                            tag="li"
-                            class="nav-item"
-                        >
+                        <router-link to="/components/button" tag="li" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Data-Upload text-3xl"></i>
                                 <p>Buttons</p>
                             </div>
                         </router-link>
-                        <router-link
-                            to="/profile/profileTwo"
-                            tag="li"
-                            class="nav-item"
-                        >
+                        <router-link to="/profile/profileTwo" tag="li" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Gear text-3xl"></i>
                                 <p>Profile</p>
@@ -119,24 +103,29 @@ let handleWindowResize = () => {
         @apply bg-purple-500;
     }
 }
+
 .submenuLi {
     &:hover {
         .submenuli-icon {
             color: #8b5cf6;
         }
     }
+
     .submenuli-icon {
         color: #9ca3af;
     }
 }
+
 .submneu-nested-link {
     padding: 0 !important;
     color: #000 !important;
+
     &:hover {
         background-color: transparent !important;
         color: #8b5cf6 !important;
     }
 }
+
 .side-content-wrap {
     .sidebar-left {
         position: fixed;
@@ -149,13 +138,16 @@ let handleWindowResize = () => {
             0 1px 4px rgba(0, 0, 0, 0.08);
         z-index: 90;
         transition: all 0.24s ease-in-out;
+
         &.open {
             left: 0;
             transition: all 0.24s ease-in-out;
         }
+
         .ps {
             height: calc(100vh - 80px);
         }
+
         .navigation-left {
             list-style: none;
             text-align: center;
@@ -163,6 +155,7 @@ let handleWindowResize = () => {
             height: 100%;
             margin: 0;
             padding: 0;
+
             .nav-item,
             .nav-item-single {
                 position: relative;
@@ -170,10 +163,12 @@ let handleWindowResize = () => {
                 width: 100%;
                 overflow: hidden;
                 cursor: pointer;
+
                 &:hover {
                     .nav-item-hold {
                         @apply text-purple-500;
                     }
+
                     &:after {
                         content: '';
                         position: absolute;
@@ -200,11 +195,14 @@ let handleWindowResize = () => {
                         @apply bg-purple-500;
                     }
                 }
+
                 border-bottom: 1px solid #dee2e6;
+
                 .nav-item-hold {
                     display: block;
                     width: 100%;
                     padding: 26px 0;
+
                     span.material-icons {
                         font-size: 2rem;
                     }
@@ -212,6 +210,7 @@ let handleWindowResize = () => {
             }
         }
     }
+
     .sidebar-left-secondary {
         position: fixed;
         top: 80px;
@@ -227,11 +226,13 @@ let handleWindowResize = () => {
             left: 120px;
             transition: all 0.24s ease-in-out;
         }
+
         ul.childNav {
             li {
                 &.dropdown-sidemenu {
                     display: block;
                     transition: all 0.3s ease-in;
+
                     &.open {
                         a {
                             .dd-arrow {
@@ -239,6 +240,7 @@ let handleWindowResize = () => {
                                 transition: all 0.3s ease-in;
                             }
                         }
+
                         ul.submenu {
                             display: block;
                             max-height: 1000px;
@@ -268,14 +270,17 @@ let handleWindowResize = () => {
                     cursor: pointer;
                     padding: 12px 24px;
                     transition: 0.15s all ease-in;
+
                     &:hover {
                         background-color: #f3f4f6;
                         @apply text-purple-500;
                     }
+
                     &.router-link-active.router-link-exact-active {
                         @apply text-purple-500;
                     }
                 }
+
                 ul.submenu {
                     @apply bg-gray-50;
                     display: none;
@@ -286,6 +291,7 @@ let handleWindowResize = () => {
                         display: block;
                         transition: all 0.3s ease-in;
                     }
+
                     li {
                         a {
                             padding-left: 48px;
@@ -295,6 +301,7 @@ let handleWindowResize = () => {
             }
         }
     }
+
     .sidebar-overlay {
         display: none;
         position: fixed;
@@ -305,6 +312,7 @@ let handleWindowResize = () => {
         background: rgba(0, 0, 0, 0);
         z-index: 101;
         cursor: w-resize;
+
         &.open {
             display: block;
         }

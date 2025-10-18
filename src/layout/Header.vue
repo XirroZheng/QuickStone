@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref, watch, watchEffect } from 'vue'
 import { Switch } from '@headlessui/vue'
-import Logo from '@/components/Base/Logo.vue'
+
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { useStore } from 'vuex'
 
