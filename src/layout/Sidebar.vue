@@ -60,7 +60,7 @@ let handleWindowResize = () => {
                             class="nav-item"
                         >
                             <div class="nav-item-hold">
-                                <i class="i-Bar-Chart text-3xl"></i>
+                                <i class="i-Home1 text-3xl"></i>
                                 <p>Dashboard</p>
                             </div>
                         </router-link>
@@ -70,7 +70,7 @@ let handleWindowResize = () => {
                             class="nav-item"
                         >
                             <div class="nav-item-hold">
-                                <i class="i-Wallet text-3xl"></i>
+                                <i class="i-Data-Upload text-3xl"></i>
                                 <p>Buttons</p>
                             </div>
                         </router-link>
@@ -80,7 +80,7 @@ let handleWindowResize = () => {
                             class="nav-item"
                         >
                             <div class="nav-item-hold">
-                                <i class="i-Find-User text-3xl"></i>
+                                <i class="i-Gear text-3xl"></i>
                                 <p>Profile</p>
                             </div>
                         </router-link>

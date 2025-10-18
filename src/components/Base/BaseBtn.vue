@@ -5,11 +5,14 @@ const props = defineProps({
     xl: Boolean,
     icon: Boolean,
     rounded: Boolean,
-    icon: Boolean
+    icon: Boolean,
+
+    handleClick: Function
 })
 </script>
 <template>
     <button
+        @click="props.handleClick"
         type="button"
         class="btn  rounded font-normal leading-4 ripple"
         :class="[
@@ -20,7 +23,7 @@ const props = defineProps({
             props.icon ? 'p-2 flex items-center justify-center' : 'py-2 px-5'
         ]"
     >
-        <slot />
+        <slot/>
     </button>
 </template>
 <style lang="scss" scoped>

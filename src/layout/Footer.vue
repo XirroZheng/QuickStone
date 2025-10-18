@@ -26,19 +26,12 @@ export default {}
                                 relative
                                 lg:fixed
                             "
-                            >test</a
+                            >UPLOAD</a
                         >
                     </div>
                     <div>
                         <p>
-                            Made with 💚 by
-                            <a
-                                class="text-primary underline"
-                                href="http://ui-lib.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                >Ui-Lib</a
-                            >
+                            UPLOAD YOUR FIRST ASSETS?
                         </p>
                     </div>
                 </div>
