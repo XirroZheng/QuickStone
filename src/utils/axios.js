@@ -1,4 +1,4 @@
-const axios = require('axios')
+import axios from 'axios'
 
 const service = axios.create({
     baseURL: '/api',
@@ -23,7 +23,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     (response) => {
-        return response.data
+        return response
     },
     (error) => {
         if (error.response) {
@@ -46,8 +46,8 @@ function request(config) {
 
 // 示例使用
 // request({ url: '/users', method: 'POST', data: { name: 'Alice' } })
-//     .then((data) => {
-//         console.log('新增用户：', data)
+//     .then((res) => {
+//         console.log('新增用户：', res)
 //     })
 //     .catch((err) => console.error(err))
 

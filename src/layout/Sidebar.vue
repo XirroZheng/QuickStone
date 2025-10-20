@@ -50,7 +50,7 @@ let handleWindowResize = () => {
                             data-item="dashboards"
                             
                         ></div> -->
-                        <router-link to="/dashboards/dashboard-version-one" tag="li" class="nav-item">
+                        <router-link to="/dashboards/dashboard" tag="li" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Home1 text-3xl"></i>
                                 <p>Dashboard</p>

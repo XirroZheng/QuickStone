@@ -8,38 +8,16 @@ const password = ref('123')
 
 
 const handleSignIn = async () => {
+    // 基础输入校验（可选）
     if (!username.value || !password.value) {
-        alert('请输入完整的账号和密码。')
+        console.warn('请输入用户名和密码')
         return
     }
-    const payload = {
-        username: username.value,
-        password: password.value,
-    }
-    try {
-        const response = await fetch('/api/signIn', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        })
-        if (response.ok) {
-            const data = await response.json()
 
-            alert('登录成功！欢迎 ' + username.value)
 
-            router.push('/');
-        } else {
-            const errorData = await response.json()
-            alert('登录失败：' + (errorData.message || '用户名或密码错误。'))
-        }
-    } catch (error) {
-        alert(error)
-    }
 }
 const handleCreateAccount = () => {
-    alert('handleCreateAccount')
+    router.push('/signUp')
 }
 </script>
 

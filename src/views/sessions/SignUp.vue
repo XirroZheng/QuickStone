@@ -1,3 +1,46 @@
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import request from '@/utils/axios'
+
+const yourName = ref('')
+const email = ref('')
+const password = ref('')
+const insurePassword = ref('')
+const router = useRouter()
+
+const handleSignUp = async () => {
+    // if (!yourName.value || !email.value || !password.value || !insurePassword.value) {
+    //     alert('请输入用户名、邮箱、密码和确认密码')
+    //     return
+    // }
+    // if (password.value !== insurePassword.value) {
+    //     alert('两次输入的密码不一致')
+    //     return
+    // }
+    request({
+        url: '/start/signUp',
+        method: 'POST',
+        data: {
+            username: yourName.value,
+            email: email.value,
+            password: password.value,
+        },
+    }).then((res) => {
+        console.log(res)
+        if (res.status === 200 && res.data.token) {
+            localStorage.setItem('token', res.data.token)
+            router.push('/signIn')
+            alert('注册成功！')
+        }
+        else {
+            alert(res.data.message)
+        }
+    }).catch((err) => console.log(err))
+}
+
+</script>
+
 
 <template>
     <div class="auth-layout-wrap flex justify-center min-h-screen flex-col bg-cover items-center">
@@ -16,25 +59,26 @@
                                 <div class="mb-3">
                                     <label class="text-base text-gray-600" for="">Your Name</label>
                                     <input class="w-full px-4 py-1 border border-gray focus:outline-none rounded-full"
-                                        type="text" placeholder="">
+                                        type="text" placeholder="" v-model="yourName">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-base text-gray-600" for="">Email Address</label>
                                     <input class="w-full px-4 py-1 border border-gray focus:outline-none rounded-full"
-                                        type="email" placeholder="">
+                                        type="email" placeholder="" v-model="email">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-base text-gray-600" for="">Password</label>
                                     <input class="w-full px-4 py-1 border border-gray focus:outline-none rounded-full"
-                                        type="password" placeholder="">
+                                        type="password" placeholder="" v-model="password">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-base text-gray-600" for="">Insure Your Password</label>
                                     <input class="w-full px-4 py-1 border border-gray focus:outline-none rounded-full"
-                                        type="password" placeholder="">
+                                        type="password" placeholder="" v-model="insurePassword">
                                 </div>
                                 <div class="mb-3">
-                                    <BaseBtn rounded block class="bg-purple-500 text-white">Sign Up</BaseBtn>
+                                    <BaseBtn rounded block class="bg-purple-500 text-white" :handleClick="handleSignUp">
+                                        Sign Up</BaseBtn>
                                 </div>
                                 <div class="mb-3">
                                     <BaseBtn block rounded
