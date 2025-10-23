@@ -3,7 +3,7 @@ import NotFound from '../views/NotFound.vue'
 import store from '../store'
 import SignIn from '../views/sessions/SignIn.vue'
 import SignUp from '../views/sessions/SignUp.vue'
-
+import request from '../utils/axios'
 const routes = [
     {
         path: '/',
@@ -12,6 +12,7 @@ const routes = [
         redirect: '/dashboards/dashboard',
         meta: {
             title: 'Home',
+            requiresAuth: true,
         },
 
         children: [
@@ -40,10 +41,10 @@ const routes = [
                 },
                 children: [
                     {
-                        path: 'button',
-                        name: 'button',
+                        path: 'upload',
+                        name: 'upload',
                         component: () =>
-                            import('../views/components/Button.vue'),
+                            import('../views/components/Upload.vue'),
                     },
                 ],
             },
@@ -78,6 +79,29 @@ const router = createRouter({
         return { left: 0, top: 0 }
     },
     routes,
+})
+
+router.beforeEach(async (to, from, next) => {
+    const whiteList = ['/signIn', '/signUp']
+
+    if (whiteList.includes(to.path)) {
+        next()
+        return
+    }
+
+    try {
+        const res = await request({
+            url: '/user/checklogin',
+            method: 'GET',
+        })
+        if (res.data.status_code === 200) {
+            next()
+        } else {
+            next('/signIn')
+        }
+    } catch (err) {
+        next('/signIn')
+    }
 })
 
 router.afterEach(() => {

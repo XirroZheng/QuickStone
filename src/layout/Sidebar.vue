@@ -56,10 +56,10 @@ let handleWindowResize = () => {
                                 <p>Dashboard</p>
                             </div>
                         </router-link>
-                        <router-link to="/components/button" tag="li" class="nav-item">
+                        <router-link to="/components/upload" tag="li" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Data-Upload text-3xl"></i>
-                                <p>Buttons</p>
+                                <p>Upload</p>
                             </div>
                         </router-link>
                         <router-link to="/profile/profileTwo" tag="li" class="nav-item">

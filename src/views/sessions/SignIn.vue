@@ -1,21 +1,40 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import request from '@/utils/axios'
+
 
 const router = useRouter()
-const username = ref('123')
-const password = ref('123')
+const username = ref('')
+const password = ref('')
 
 
 const handleSignIn = async () => {
-    // 基础输入校验（可选）
     if (!username.value || !password.value) {
-        console.warn('请输入用户名和密码')
+        console.warn('请输入正确的用户名和密码')
         return
     }
 
+    request({
+        url: '/user/login',
+        method: 'POST',
+        data: {
+            username: username.value,
+            password: password.value
+        },
+    }).then((res) => {
+        if (res.data.status_code === 200) {
+            router.push('/')
+        } else {
+            console.error('登录失败:', res.data.status_msg)
+        }
+    }).catch((err) => {
+        console.error('登录失败:', err)
+    })
 
 }
+
+
 const handleCreateAccount = () => {
     router.push('/signUp')
 }
@@ -35,13 +54,13 @@ const handleCreateAccount = () => {
                                     <label class="text-xs text-gray-600" for="">Email Address</label>
                                     <input
                                         class="w-full px-4 py-1 bg-gray-100 focus:outline-none border border-gray-400 rounded-full"
-                                        value="ui-lib@gmail.com" type="email" placeholder="" />
+                                        type="email" placeholder="" v-model="username" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-xs text-gray-600" for="">Password</label>
                                     <input
                                         class="w-full px-4 py-1 bg-gray-100 focus:outline-none border border-gray-400 rounded-full"
-                                        value="askjhdgahsgd" type="password" placeholder="" />
+                                        type="password" placeholder="" v-model="password" />
                                 </div>
                                 <div class="mb-4">
                                     <BaseBtn block class="bg-purple-500 mb-2 text-white rounded-full"

@@ -10,16 +10,16 @@ const insurePassword = ref('')
 const router = useRouter()
 
 const handleSignUp = async () => {
-    // if (!yourName.value || !email.value || !password.value || !insurePassword.value) {
-    //     alert('请输入用户名、邮箱、密码和确认密码')
-    //     return
-    // }
-    // if (password.value !== insurePassword.value) {
-    //     alert('两次输入的密码不一致')
-    //     return
-    // }
+    if (!yourName.value || !email.value || !password.value || !insurePassword.value) {
+        alert('请输入用户名、邮箱、密码和确认密码')
+        return
+    }
+    if (password.value !== insurePassword.value) {
+        alert('两次输入的密码不一致')
+        return
+    }
     request({
-        url: '/start/signUp',
+        url: '/user/register',
         method: 'POST',
         data: {
             username: yourName.value,
