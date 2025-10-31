@@ -2,12 +2,12 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import request from '@/utils/axios'
-
+import { useStore } from 'vuex'
 
 const router = useRouter()
 const username = ref('')
 const password = ref('')
-
+const store = useStore()
 
 const handleSignIn = async () => {
     if (!username.value || !password.value) {
@@ -24,6 +24,8 @@ const handleSignIn = async () => {
         },
     }).then((res) => {
         if (res.data.status_code === 200) {
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('user_id', res.data.user_id)
             router.push('/')
         } else {
             console.error('登录失败:', res.data.status_msg)

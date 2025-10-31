@@ -4,6 +4,7 @@ import store from '../store'
 import SignIn from '../views/sessions/SignIn.vue'
 import SignUp from '../views/sessions/SignUp.vue'
 import request from '../utils/axios'
+
 const routes = [
     {
         path: '/',
@@ -29,6 +30,22 @@ const routes = [
                         name: 'dashboard',
                         component: () =>
                             import('../views/dashboards/Dashboards.v1.vue'),
+                    },
+                ],
+            },
+            {
+                path: '/repositories',
+                name: 'repositories',
+                component: () => import('../views/components/index.vue'),
+                meta: {
+                    title: 'Repository',
+                },
+                children: [
+                    {
+                        path: 'repository',
+                        name: 'repository',
+                        component: () =>
+                            import('../views/components/NewPage.vue'),
                     },
                 ],
             },
@@ -81,28 +98,28 @@ const router = createRouter({
     routes,
 })
 
-router.beforeEach(async (to, from, next) => {
-    const whiteList = ['/signIn', '/signUp']
+// router.beforeEach(async (to, from, next) => {
+//     const whiteList = ['/signIn', '/signUp']
 
-    if (whiteList.includes(to.path)) {
-        next()
-        return
-    }
+//     if (whiteList.includes(to.path)) {
+//         next()
+//         return
+//     }
 
-    try {
-        const res = await request({
-            url: '/user/checklogin',
-            method: 'GET',
-        })
-        if (res.data.status_code === 200) {
-            next()
-        } else {
-            next('/signIn')
-        }
-    } catch (err) {
-        next('/signIn')
-    }
-})
+//     try {
+//         const res = await request({
+//             url: '/user/checklogin',
+//             method: 'GET',
+//         })
+//         if (res.data.status_code === 200) {
+//             next()
+//         } else {
+//             next('/signIn')
+//         }
+//     } catch (err) {
+//         next('/signIn')
+//     }
+// })
 
 router.afterEach(() => {
     if (window.innerWidth <= 1200) {

@@ -53,34 +53,27 @@ let handleWindowResize = () => {
                         <router-link to="/dashboards/dashboard" tag="li" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Home1 text-3xl"></i>
-                                <p>Dashboard</p>
+                                <p>主页</p>
+                            </div>
+                        </router-link>
+                        <router-link to="/repositories/repository" tag="li" class="nav-item">
+                            <div class="nav-item-hold">
+                                <i class="i-Folder text-3xl"></i>
+                                <p>仓库</p>
                             </div>
                         </router-link>
                         <router-link to="/components/upload" tag="li" class="nav-item">
                             <div class="nav-item-hold">
-                                <i class="i-Data-Upload text-3xl"></i>
-                                <p>Upload</p>
+                                <i class="i-Upload text-3xl"></i>
+                                <p>上传</p>
                             </div>
                         </router-link>
                         <router-link to="/profile/profileTwo" tag="li" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Gear text-3xl"></i>
-                                <p>Profile</p>
+                                <p>设置</p>
                             </div>
                         </router-link>
-                        <router-link to="/signIn" tag="li" class="nav-item">
-                            <div class="nav-item-hold">
-                                <i class="i-Checked-User text-3xl"></i>
-                                <p>Sign In</p>
-                            </div>
-                        </router-link>
-                        <router-link to="/signUp" tag="li" class="nav-item">
-                            <div class="nav-item-hold">
-                                <i class="i-Checked-User text-3xl"></i>
-                                <p>Sign Up</p>
-                            </div>
-                        </router-link>
-
                     </ul>
                 </perfect-scrollbar>
             </div>

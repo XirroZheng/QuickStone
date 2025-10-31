@@ -58,7 +58,7 @@ function uploadFile (file) {
     headers: {
       'Content-Type': 'multipart/form-data'
     },
-    // axios 提供 onUploadProgress
+
     onUploadProgress: function (event) {
       if (event.lengthComputable) {
         const percent = Math.round((event.loaded / event.total) * 100)
@@ -68,7 +68,6 @@ function uploadFile (file) {
   })
 }
 
-// 上传所有文件（并行上传）
 async function uploadFiles () {
   if (!files.value.length) return
   uploading.value = true

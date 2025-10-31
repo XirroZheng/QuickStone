@@ -4,35 +4,17 @@ export default {}
 
 <template>
     <footer class="mt-10">
-        <div class="container-fluid mx-auto">
-            <BaseCard class="">
+        <div class="container-fluid mx-auto px-4">
+            <BaseCard class="w-full">
                 <div class="flex flex-col lg:flex-row items-center">
-                    <div>
-                        <a
-                            target="_blank"
-                            href="https://baidu.com"
-                            style="bottom: 14px; right: 80px"
-                            class="
-                                py-3
-                                px-5
-                                inline-block
-                                bg-green-500
-                                text-white
-                                btn
-                                rounded
-                                font-normal
-                                leading-4
-                                ripple
-                                relative
-                                lg:fixed
-                            "
-                            >UPLOAD</a
-                        >
-                    </div>
-                    <div>
-                        <p>
-                            UPLOAD YOUR FIRST ASSETS?
-                        </p>
+                    <div class="w-full">
+                        <div class="flex justify-between items-center w-full">
+                            <span class="text-left">需要帮助?</span>
+                            <a target="_blank" href="https://baidu.com"
+                                class="py-3 px-5 bg-green-500 text-white btn rounded font-normal leading-4">
+                                点击这里
+                            </a>
+                        </div>
                     </div>
                 </div>
             </BaseCard>

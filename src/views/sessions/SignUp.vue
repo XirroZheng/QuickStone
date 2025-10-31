@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import request from '@/utils/axios'
 
 const yourName = ref('')
-const email = ref('')
 const password = ref('')
 const insurePassword = ref('')
 const router = useRouter()
@@ -23,18 +22,15 @@ const handleSignUp = async () => {
         method: 'POST',
         data: {
             username: yourName.value,
-            email: email.value,
             password: password.value,
         },
     }).then((res) => {
-        console.log(res)
-        if (res.status === 200 && res.data.token) {
-            localStorage.setItem('token', res.data.token)
+        if (res.data.status_code === 200) {
             router.push('/signIn')
             alert('注册成功！')
         }
         else {
-            alert(res.data.message)
+            alert(res.data.status_msg)
         }
     }).catch((err) => console.log(err))
 }
@@ -60,11 +56,6 @@ const handleSignUp = async () => {
                                     <label class="text-base text-gray-600" for="">Your Name</label>
                                     <input class="w-full px-4 py-1 border border-gray focus:outline-none rounded-full"
                                         type="text" placeholder="" v-model="yourName">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="text-base text-gray-600" for="">Email Address</label>
-                                    <input class="w-full px-4 py-1 border border-gray focus:outline-none rounded-full"
-                                        type="email" placeholder="" v-model="email">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-base text-gray-600" for="">Password</label>
