@@ -23,7 +23,7 @@ const handleSignIn = async () => {
             password: password.value
         },
     }).then((res) => {
-        if (res.data.status_code === 200) {
+        if (res.data.status_code === 0) {
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user_id', res.data.user_id)
             router.push('/')
@@ -53,7 +53,7 @@ const handleCreateAccount = () => {
                             <h1 class="mb-3 text-lg">Sign In</h1>
                             <form action="">
                                 <div class="mb-3">
-                                    <label class="text-xs text-gray-600" for="">Email Address</label>
+                                    <label class="text-xs text-gray-600" for="">Your Name</label>
                                     <input
                                         class="w-full px-4 py-1 bg-gray-100 focus:outline-none border border-gray-400 rounded-full"
                                         type="email" placeholder="" v-model="username" />

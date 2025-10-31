@@ -25,7 +25,7 @@ const handleSignUp = async () => {
             password: password.value,
         },
     }).then((res) => {
-        if (res.data.status_code === 200) {
+        if (res.data.status_code === 0) {
             router.push('/signIn')
             alert('注册成功！')
         }

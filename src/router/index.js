@@ -98,28 +98,20 @@ const router = createRouter({
     routes,
 })
 
-// router.beforeEach(async (to, from, next) => {
-//     const whiteList = ['/signIn', '/signUp']
+router.beforeEach(async (to, from, next) => {
+    const whiteList = ['/signIn', '/signUp']
 
-//     if (whiteList.includes(to.path)) {
-//         next()
-//         return
-//     }
-
-//     try {
-//         const res = await request({
-//             url: '/user/checklogin',
-//             method: 'GET',
-//         })
-//         if (res.data.status_code === 200) {
-//             next()
-//         } else {
-//             next('/signIn')
-//         }
-//     } catch (err) {
-//         next('/signIn')
-//     }
-// })
+    if (whiteList.includes(to.path)) {
+        next()
+        return
+    }
+    const token = localStorage.getItem('token')
+    if (token) {
+        next()
+    } else {
+        next('/signIn')
+    }
+})
 
 router.afterEach(() => {
     if (window.innerWidth <= 1200) {

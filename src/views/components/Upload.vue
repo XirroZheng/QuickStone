@@ -52,7 +52,7 @@ function uploadFile (file) {
   formData.append('file', file)
 
   return request({
-    url: '/user/upload',
+    url: '/storage/upload',
     method: 'POST',
     data: formData,
     headers: {

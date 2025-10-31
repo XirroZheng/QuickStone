@@ -26,7 +26,7 @@ const handleSignOut = async () => {
             // username: store.username        
         });
 
-        if (res.data.status_code == 200) {
+        if (res.data.status_code == 0) {
             alert("退出成功！");
             //clearLocalAuth();      
             next("/signIn");
