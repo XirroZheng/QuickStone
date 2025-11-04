@@ -45,7 +45,7 @@ const routes = [
                         path: 'repository',
                         name: 'repository',
                         component: () =>
-                            import('../views/components/NewPage.vue'),
+                            import('../views/components/Repos.vue'),
                     },
                 ],
             },
@@ -98,20 +98,20 @@ const router = createRouter({
     routes,
 })
 
-router.beforeEach(async (to, from, next) => {
-    const whiteList = ['/signIn', '/signUp']
+// router.beforeEach(async (to, from, next) => {
+//     const whiteList = ['/signIn', '/signUp']
 
-    if (whiteList.includes(to.path)) {
-        next()
-        return
-    }
-    const token = localStorage.getItem('token')
-    if (token) {
-        next()
-    } else {
-        next('/signIn')
-    }
-})
+//     if (whiteList.includes(to.path)) {
+//         next()
+//         return
+//     }
+//     const token = localStorage.getItem('token')
+//     if (token) {
+//         next()
+//     } else {
+//         next('/signIn')
+//     }
+// })
 
 router.afterEach(() => {
     if (window.innerWidth <= 1200) {

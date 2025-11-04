@@ -24,9 +24,12 @@ const handleSignIn = async () => {
         },
     }).then((res) => {
         if (res.data.status_code === 0) {
+            store.commit('userInfo/setUserName', username)
+            store.commit('userInfo/setUserRole', 'user')
+            store.commit('userInfo/isLoggedIn', true)
+            store.commit('userInfo/setUserId', res.data.user_id)
             localStorage.setItem('token', res.data.token)
-            localStorage.setItem('user_id', res.data.user_id)
-            router.push('/')
+            router.replace('/')
         } else {
             console.error('登录失败:', res.data.status_msg)
         }

@@ -1,12 +1,14 @@
 <script setup>
-import { onMounted, ref, watch, watchEffect } from 'vue'
-import { Switch } from '@headlessui/vue'
 
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { useStore } from 'vuex'
 import request from '@/utils/axios'
+import { computed } from 'vue'
+import { MenuItem, Menu } from '@headlessui/vue'
 
+import { useRouter } from 'vue-router'
 let store = useStore()
+const router = useRouter()
+const username = computed(() => store.getters['userInfo/getUserName'])
 
 const sideBarToggle = () => {
     let sidenav = store.state.largeSidebar.sidebarToggleProperties.isSideNavOpen
@@ -23,13 +25,17 @@ const handleSignOut = async () => {
         const res = await request({
             url: "/user/logout",
             method: "POST",
-            // username: store.username        
+            username: username.value
         });
 
         if (res.data.status_code == 0) {
             alert("退出成功！");
-            //clearLocalAuth();      
-            next("/signIn");
+            store.commit('userInfo/isLoggedIn', false)
+            store.commit('userInfo/setUserId', null)
+            store.commit('userInfo/setUserName', null)
+            store.commit('userInfo/setUserRole', null)
+            localStorage.removeItem('token')
+            router.replace('/signIn');
         }
     } catch (error) {
         console.error(error);
@@ -203,7 +209,7 @@ const handleSignOut = async () => {
                                 : 'text-gray-900',
                             'group flex  items-center w-full px-4 py-2 text-sm',
                         ]">
-                            Sign Out
+                            退出登录
                         </button>
                         </MenuItem>
                     </div>

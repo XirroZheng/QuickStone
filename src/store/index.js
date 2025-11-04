@@ -1,12 +1,10 @@
 import { createStore } from 'vuex'
 
-
 import largeSidebar from './modules/largeSidebar'
-
-
-export default  createStore({
+import userInfo from './modules/userInfo'
+export default createStore({
     modules: {
-        largeSidebar
-        
-    }
-});
+        largeSidebar,
+        userInfo,
+    },
+})
