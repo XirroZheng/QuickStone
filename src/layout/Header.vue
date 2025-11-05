@@ -1,9 +1,10 @@
 <script setup>
-
+import { onMounted, ref, watch, watchEffect } from 'vue'
+import { Switch } from '@headlessui/vue'
 import { useStore } from 'vuex'
 import request from '@/utils/axios'
 import { computed } from 'vue'
-import { MenuItem, Menu } from '@headlessui/vue'
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 
 import { useRouter } from 'vue-router'
 let store = useStore()
@@ -43,6 +44,9 @@ const handleSignOut = async () => {
     }
 };
 
+const handleAccountSettingsClick = () => {
+    router.push('/profile/account');
+}
 </script>
 
 <template>
@@ -188,8 +192,8 @@ const handleSignOut = async () => {
                                 ? 'bg-purple-500 text-white'
                                 : 'text-gray-900',
                             'group flex  items-center w-full px-4 py-2 text-sm',
-                        ]">
-                            Account Settings
+                        ]" @click="handleAccountSettingsClick">
+                            账户设置
                         </button>
                         </MenuItem>
                         <MenuItem v-slot="{ active }">
@@ -199,7 +203,7 @@ const handleSignOut = async () => {
                                 : 'text-gray-900',
                             'group flex  items-center w-full px-4 py-2 text-sm',
                         ]">
-                            Billing History
+                            账单记录
                         </button>
                         </MenuItem>
                         <MenuItem v-slot="{ active }">

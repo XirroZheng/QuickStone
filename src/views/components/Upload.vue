@@ -8,6 +8,11 @@ const uploading = ref(false)    // 上传状态
 const progressMap = ref({})     // 每个文件的上传进度
 const fileInput = ref(null)     // 文件 input 引用
 
+const isChooseBucket = ref(false);
+const showBucketSelector = ref(false)
+
+const currentBucket = ref(null)
+
 // 文件选择
 function handleFileChange (event) {
   const input = event.target
@@ -40,13 +45,11 @@ function handleDragOver (event) {
   event.preventDefault()
 }
 
-// 删除文件
 function removeFile (file) {
   files.value = files.value.filter(f => f.name !== file.name)
   delete progressMap.value[file.name]
 }
 
-// 上传单个文件
 function uploadFile (file) {
   const formData = new FormData()
   formData.append('file', file)
@@ -86,6 +89,13 @@ async function uploadFiles () {
   }
 }
 
+const uploadFilesReady = () => {
+  if (!isChooseBucket.value) {
+    showBucketSelector.value = true
+  }
+  else uploadFiles()
+}
+
 </script>
 
 <template>
@@ -118,11 +128,30 @@ async function uploadFiles () {
 
     <div v-if="files.length" class="mt-4 text-center">
       <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" :disabled="uploading"
-        @click="uploadFiles">
+        @click="uploadFilesReady">
         {{ uploading ? '上传中...' : '开始上传' }}
       </button>
     </div>
   </BaseCard>
+
+  <div v-if="showBucketSelector" class="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+      <h2 class="text-lg font-semibold mb-4">请选择桶</h2>
+
+      <ul>
+        <li v-for="bucket in buckets" :key="bucket.id" class="p-2 hover:bg-purple-100 rounded cursor-pointer"
+          @click="selectBucket(bucket)">
+          {{ bucket.info.name }}
+        </li>
+      </ul>
+
+      <div class="text-right mt-4">
+        <button class="px-4 py-1 bg-gray-400 text-white rounded mr-2" @click="showBucketSelector = false">
+          取消
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>

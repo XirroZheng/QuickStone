@@ -68,7 +68,7 @@ let handleWindowResize = () => {
                                 <p>上传</p>
                             </div>
                         </router-link>
-                        <router-link to="/profile/profileTwo" tag="li" class="nav-item">
+                        <router-link to="/profile/account" tag="li" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Gear text-3xl"></i>
                                 <p>设置</p>

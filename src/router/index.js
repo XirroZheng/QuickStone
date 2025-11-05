@@ -29,7 +29,7 @@ const routes = [
                         path: 'dashboard',
                         name: 'dashboard',
                         component: () =>
-                            import('../views/dashboards/Dashboards.v1.vue'),
+                            import('../views/dashboards/Dashboards.vue'),
                     },
                 ],
             },
@@ -74,10 +74,10 @@ const routes = [
                 },
                 children: [
                     {
-                        path: 'profileTwo',
-                        name: 'ProfileTwo',
+                        path: 'account',
+                        name: 'account',
                         component: () =>
-                            import('../views/profile/ProfileTwo.vue'),
+                            import('../views/profile/Account.vue'),
                     },
                 ],
             },
