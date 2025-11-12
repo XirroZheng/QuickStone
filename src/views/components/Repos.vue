@@ -6,35 +6,17 @@ import request from '../../utils/axios';
 
 
 const store = useStore();
-const userName = computed(() => store.getters['userInfo/getUserName'])
+const username = localStorage.getItem('username')
 const bucketList = ref([]);
 const isInBucket = ref(false)
 
 const bucket = ref({
-  id: '',
-  status: '有效',
-  info: {
-    name: '桶名称',
-    volumn: '666',
-    create_time: '2023-01-01',
-    type: 'public',
-  },
-  store: [
-    {
-      id: '',
-      name: '对象名称',
-      size: '1024',
-      type: 'file',
-      create_time: '2023-01-01',
-    },
-    {
-      id: '',
-      name: '对象名称',
-      size: '1024',
-      type: 'file',
-      create_time: '2023-01-01',
-    },
-  ]
+            "bucket_name": "",
+            "area": "",
+            "storage_type": "",
+            "acl_type": "",
+            "create_time": "",
+            "status": ""
 });
 
 const currentBucket = ref(bucket)
@@ -44,19 +26,15 @@ const getBuckets = async () => {
     url: '/storage/bucket/overview',
     method: 'POST',
     data: {
-      user_name: username
+      user_name:username
     },
   }).then((res) => {
     if (res.data.status_code === 0) {
-      console.log(res.data)
       bucketList.value = res.data.buckets
-    } else {
-      console.error(res.data.status_msg)
+      console.log(bucketList.value)
     }
   }).catch((err) => {
-    console.error(err)
   })
-
 }
 getBuckets()
 
@@ -82,10 +60,10 @@ const handleInBucketClick = (bucket) => {
         <BaseCard>
           <div class="flex align-center">
             <div class="m-auto">
-              <p class="text-purple-400 text-lg p-4">{{ b.info.name }}</p>
-              <p class="text-gray-400">容量：{{ b.info.volumn }}</p>
-              <p class="text-gray-400">状态：{{ b.status }}</p>
-              <p class="text-gray-400">类型：{{ b.info.type }}</p>
+              <p class="text-purple-400 text-lg p-4">{{ b.bucket_name }}</p>
+              <p class="text-gray-400">地区：{{ b.area }}</p>
+              <p class="text-gray-400">存储类型：{{ b.storage_type }}</p>
+              <p class="text-gray-400">访问类型：{{ b.acl_type }}</p>
               <p class="text-gray-400">创建时间：{{ b.create_time }}</p>
               <div class="p-4">
                 <button class="bg-purple-300 text-white px-4 py-1 rounded-md "

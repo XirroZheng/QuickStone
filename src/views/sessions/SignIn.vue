@@ -24,10 +24,11 @@ const handleSignIn = async () => {
         },
     }).then((res) => {
         if (res.data.status_code === 0) {
-            store.commit('userInfo/setUserName', username)
-            store.commit('userInfo/setUserRole', 'user')
-            store.commit('userInfo/isLoggedIn', true)
-            store.commit('userInfo/setUserId', res.data.user_id)
+            // store.commit('userInfo/setUserName', username.value)
+            // store.commit('userInfo/setUserRole', 'user')
+            // store.commit('userInfo/isLoggedIn', true)
+            // store.commit('userInfo/setUserId', res.data.user_id)
+            localStorage.setItem('username',username.value)
             localStorage.setItem('token', res.data.token)
             router.replace('/')
         } else {
