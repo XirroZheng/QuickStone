@@ -6,8 +6,7 @@ import request from '../../utils/axios';
 
 
 const store = useStore();
-const userId = computed(() => store.getters['userInfo/getUserId'])
-const bucketNum = ref(4);
+const userName = computed(() => store.getters['userInfo/getUserName'])
 const bucketList = ref([]);
 const isInBucket = ref(false)
 
@@ -40,27 +39,26 @@ const bucket = ref({
 
 const currentBucket = ref(bucket)
 
-// const getBuckets = async () => {
-//   request({
-//     url: '/storage/getbuckets',
-//     method: 'POST',
-//     data: {
-//       userid: userId.value
-//     },
-//   }).then((res) => {
-//     if (res.data.status_code === 0) {
-//       console.log(res.data)
-//       bucketNum.value = res.data.bucket_num
-//       bucketList.value = res.data.buckets_list
-//     } else {
-//       console.error(res.data.status_msg)
-//     }
-//   }).catch((err) => {
-//     console.error(err)
-//   })
+const getBuckets = async () => {
+  request({
+    url: '/storage/bucket/overview',
+    method: 'POST',
+    data: {
+      user_name: username
+    },
+  }).then((res) => {
+    if (res.data.status_code === 0) {
+      console.log(res.data)
+      bucketList.value = res.data.buckets
+    } else {
+      console.error(res.data.status_msg)
+    }
+  }).catch((err) => {
+    console.error(err)
+  })
 
-// }
-// getBuckets()
+}
+getBuckets()
 
 const handleInBucketClick = (bucket) => {
   isInBucket.value = true
