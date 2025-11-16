@@ -21,8 +21,8 @@ const handleSignUp = async () => {
         url: '/user/register',
         method: 'POST',
         data: {
-            username: yourName.value,
-            password: password.value,
+            user_name: yourName.value,
+            pass_word: password.value,
         },
     }).then((res) => {
         if (res.data.status_code === 0) {

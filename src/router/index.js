@@ -58,7 +58,7 @@ const routes = [
                 },
                 children: [
                     {
-                        path: 'upload',
+                        path: 'upload/:bucket_name?',
                         name: 'upload',
                         component: () =>
                             import('../views/components/Upload.vue'),
@@ -76,8 +76,7 @@ const routes = [
                     {
                         path: 'account',
                         name: 'account',
-                        component: () =>
-                            import('../views/profile/Account.vue'),
+                        component: () => import('../views/profile/Account.vue'),
                     },
                 ],
             },
