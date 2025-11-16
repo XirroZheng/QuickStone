@@ -61,6 +61,7 @@ function uploadFile (file) {
   formData.append('key', nameWithoutExt)
   formData.append('target_user_name', localStorage.getItem('username'))
   formData.append('object_type', extension)
+  formData.append('bucket_name', bucket_name)
   return request({
     url: '/storage/upload',
     method: 'POST',
