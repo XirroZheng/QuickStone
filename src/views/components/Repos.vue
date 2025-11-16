@@ -10,8 +10,6 @@ const username = localStorage.getItem('username')
 const bucketList = ref([]);
 const isInBucket = ref(false)
 
-const showCreateModal = ref(false)
-
 const bucket = ref({
   "bucket_name": "",
   "area": "",
@@ -138,9 +136,8 @@ const handleDownloadClick = (obj) => {
       </div>
     </div>
     <div class="mt-5 flex justify-center">
-      <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="() => {
-        showCreateModal = true
-      }">
+      <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap"
+        @click="">
         创建一个新桶
       </button>
     </div>
@@ -170,5 +167,5 @@ const handleDownloadClick = (obj) => {
   </div>
 
 
-  <!-- <NewBucket /> -->
+  <NewBucket />
 </template>

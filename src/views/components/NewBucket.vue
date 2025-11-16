@@ -53,14 +53,12 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, defineExpose } from 'vue'
+const showModal = ref(true);
 
 const props = defineProps({
-  modelValue: Boolean
-});
-
-
-const showModal = ref(true);
+  visible: Boolean
+})
 
 const bucketName = ref('')
 const storageType = ref('标准存储')

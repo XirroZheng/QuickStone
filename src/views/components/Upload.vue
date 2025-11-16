@@ -52,15 +52,19 @@ function removeFile (file) {
 
 function uploadFile (file) {
   const formData = new FormData()
+
+  const fullName = file.name
+  const extension = fullName.includes('.') ? fullName.slice(fullName.lastIndexOf('.') + 1) : '';
+  const nameWithoutExt = fullName.includes('.') ? fullName.slice(0, fullName.lastIndexOf('.')) : fullName;
+
   formData.append('file', file)
-  formData.append('key', file.name)
+  formData.append('key', nameWithoutExt)
   formData.append('target_user_name', localStorage.getItem('username'))
+  formData.append('object_type', extension)
   return request({
     url: '/storage/upload',
     method: 'POST',
-    data: {
-      formData,
-    },
+    data: formData,
     headers: {
       'Content-Type': 'multipart/form-data'
     },
@@ -83,7 +87,7 @@ async function uploadFiles () {
     const results = await Promise.all(uploadPromises)
 
     uploading.value = false
-    alert('上传完成: ' + results.map(r => r.filename || r.data.filename).join(', '))
+    //alert('上传完成: ' + results.map(r => r.filename || r.data.filename).join(', '))
     files.value = []
     progressMap.value = {}
   } catch (err) {

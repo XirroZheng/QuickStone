@@ -9,7 +9,7 @@ const insurePassword = ref('')
 const router = useRouter()
 
 const handleSignUp = async () => {
-    if (!yourName.value || !email.value || !password.value || !insurePassword.value) {
+    if (!yourName.value  || !password.value || !insurePassword.value) {
         alert('请输入用户名、邮箱、密码和确认密码')
         return
     }
