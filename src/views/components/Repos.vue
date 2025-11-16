@@ -69,7 +69,7 @@ const handleInBucketClick = (b) => {
     },
   }).then((res) => {
     if (res.data.status_code === 0) {
-      currentBucket.value = res.data.bucket
+      currentBucket.value = res.data.objects
       isInBucket.value = true
     }
   }).catch((err) => {
@@ -170,5 +170,5 @@ const handleDownloadClick = (obj) => {
   </div>
 
 
-  <NewBucket />
+  <!-- <NewBucket /> -->
 </template>
