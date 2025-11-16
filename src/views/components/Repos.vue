@@ -145,7 +145,7 @@ const handleDownloadClick = (obj) => {
       </button>
     </div>
     <div class="grid grid-cols-12 gap-5" v-if="isInBucket">
-      <div v-for="(obj, index) in currentBucket.objects" :key="index" class="
+      <div v-for="(obj, index) in currentBucket" :key="index" class="
           col-span-12
           xl:col-span-12
           lg:col-span-12

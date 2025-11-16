@@ -60,6 +60,8 @@ function uploadFile (file) {
     data: {
       formData,
       bucket_name: bucket_name,
+      key: file.name,
+      target_user_name: localStorage.getItem('username')
     },
     headers: {
       'Content-Type': 'multipart/form-data'
