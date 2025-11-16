@@ -20,7 +20,7 @@ const handleSignIn = async () => {
         method: 'POST',
         data: {
             user_name: username.value,
-            pass_word: password.value
+            password: password.value
         },
     }).then((res) => {
         if (res.data.status_code === 0) {

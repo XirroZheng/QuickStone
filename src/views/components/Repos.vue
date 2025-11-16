@@ -61,7 +61,7 @@ const handleSettingClick = (b) => {
 const handleInBucketClick = (b) => {
 
   request({
-    url: '/storage/bucket/get',
+    url: '/storage/bucket/objects',
     method: 'POST',
     data: {
       user_name: username,
