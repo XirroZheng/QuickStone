@@ -82,78 +82,7 @@ const handleInBucketClick = (b) => {
 }
 
 const handleDeleteClick = (obj) => {
-  request({
-    url: '/storage/delete',
-    method: 'POST',
-    data: {
-      user_name: username,
-      bucket_name: currentBucket.value.bucket.bucket_name,
-      key: obj.key
-    },
-  }).then((res) => {
-    if (res.data.status_code === 0) {
-      currentBucket.value.objects = currentBucket.value.objects.filter((o) => o.key !== obj.key)
-    }
-  }).catch((err) => {
-    console.log(err)
-  })
-}
- const handleDownloadClick = ()=>{
-  const error = ref(null)
-  const controller = ref(null)
-
-  // 开始接收流数据
-  const startStream = async () => {
-    loading.value = true
-    error.value = null
-    data.value = ''
-    controller.value = new AbortController()
-      
-      request({
-    url: '/storage/download',
-    method: 'POST',
-    signal: controller.value.signal,
-    data: {
-      user_name: username,
-      bucket_name: currentBucket.value.bucket.bucket_name,
-      key: obj.key
-    },
-  }).then((res) => {
-    if (res.data.status_code === 0) {
-
-      const reader = response.body.getReader()
-      const decoder = new TextDecoder()
-
-      while (true) {
-        const { done, value } = await reader.read()
-        
-        if (done) {
-          break
-        }
-        
-        // 解码并处理数据块
-        const chunk = decoder.decode(value, { stream: true })
-        data.value += chunk
-          const stopStream = () => {
-    if (controller.value) {
-      controller.value.abort()
-      controller.value = null
-    }
-  }
-
-  return {
-    data,
-    loading,
-    error,
-    startStream,
-    stopStream,
-  }
-    }
-  }).catch((err) => {
-    console.log(err)
-  }).finally(()=>{
-          loading.value = false
-  })
+  
 }
 
 </script>
