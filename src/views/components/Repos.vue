@@ -90,7 +90,7 @@ const handleDeleteClick = (obj) => {
     data: {
       target_user_name: username,
       bucket_name: currentBucket.value.bucket.bucket_name,
-      object_name: obj.key
+      key: obj.key
     },
   }).then((res) => {
     if (res.data.status_code === 0) {
@@ -188,26 +188,16 @@ const handleDownloadClick = (obj) => {
             <p class="text-purple-400 text-lg flex-shrink-0">
               {{ obj.key }}
             </p>
-
-            <!-- 大小 -->
             <p class="text-gray-400 flex-shrink-0">
               大小：{{ obj.size }}
             </p>
-
-            <!-- 时间 -->
             <p class="text-gray-400 flex-shrink-0">
               创建时间：{{ obj.create_time }}
             </p>
-
-            <!-- 占位自动撑开：把按钮推到右侧 -->
             <div class="flex-grow"></div>
-
-            <!-- 下载按钮 -->
             <button class="bg-purple-300 text-white px-4 py-1 rounded-md" @click="handleDownloadClick(obj)">
               下载
             </button>
-
-            <!-- 删除按钮 -->
             <button class="bg-purple-300 text-white px-4 py-1 rounded-md" @click="handleDeleteClick(obj)">
               删除
             </button>

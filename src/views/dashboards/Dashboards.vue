@@ -23,7 +23,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                     <div class="flex align-center">
                         <i class="i-Add-User text-6xl text-purple-200"></i>
                         <div class="m-auto">
-                            <p class="text-gray-400">New Leads</p>
+                            <p class="text-gray-400">桶数量</p>
                             <p class="text-xl text-primary">205</p>
                         </div>
                     </div>
