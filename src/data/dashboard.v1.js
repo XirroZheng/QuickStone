@@ -77,13 +77,11 @@ export const baseColors = [
 export const dashboardBuckets = {
     chartOptions: {
         chart: { type: 'pie', height: 350 },
-        dataLabels: { enabled: false },
+        dataLabels: { enabled: true },
         legend: { show: false },
         tooltip: {
             y: {
-                formatter: (val, opts) => {
-                    // 获取对应的 label
-                    const label = opts.w.config.labels[opts.seriesIndex]
+                formatter: (val) => {
                     return `${label}: ${val}字节`
                 },
             },
