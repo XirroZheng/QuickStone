@@ -1,7 +1,7 @@
 <script setup>
 import {
     dashboardOne,
-    dashboardTwo,
+    dashboardBuckets,
     splineAreaWidgetTwo,
     splineAreaWidgetThree,
 } from '@/data/dashboard.v1.js'
@@ -9,10 +9,35 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import { ref } from 'vue'
 import request from '../../utils/axios'
 
-const userAudit = ref({
-    bucketCount: 0,
-    usedSpace: 0,
-})
+const bucketCount = ref(0)
+const friendCount = ref(0)
+const usedSpace = ref(0)
+const monthCost = ref(0)
+const bucketUsage = ref({})
+const bucketSeries = ref([])
+const bucketLabels = ref([])
+const colors = ref([])
+
+
+function getColorsByBucketUsage (bucketUsage) {
+    const buckets = Object.entries(bucketUsage).map(([name, used]) => ({ name, used }))
+
+
+    const sortedIndexes = buckets
+        .map((b, i) => ({ i, used: b.used }))
+        .sort((a, b) => a.used - b.used)
+        .map(item => item.i)
+
+    const colors = []
+    for (let i = 0; i < buckets.length; i++) {
+        const idx = sortedIndexes.indexOf(i)
+        colors.push(baseColors[idx] || '#ccc')
+    }
+    return colors
+}
+
+
+
 const getUserAudit = () => {
     request({
         url: '/user/audit',
@@ -22,8 +47,12 @@ const getUserAudit = () => {
         }
     }).then((res) => {
         if (res.data.status_code === 0) {
-            userAudit.value.bucketCount = res.data.data.bucket_num
-            userAudit.value.usedSpace = res.data.data.storage_used
+            bucketUsage = res.data.bucket_usage
+            bucketCount = Object.keys(bucketUsage).length
+            usedSpace = res.data.storage_used
+            bucketSeries = Object.values(bucketUsage)
+            bucketLabels = Object.keys(bucketUsage)
+            colors = getColorsByBucketUsage(bucketUsage)
         }
     }).catch((err) => {
         console.log(err)
@@ -116,8 +145,8 @@ getUserAudit();
             <div class="col-span-12 xl:col-span-4 md:col-span-6">
                 <BaseCard>
                     <h4 class="card-title mb-4">空间使用情况</h4>
-                    <apexchart type="pie" height="290" :options="dashboardTwo.chartOptions"
-                        :series="dashboardTwo.series"></apexchart>
+                    <apexchart type="pie" height="290" :options="dashboardBuckets.chartOptions" :series="bucketSeries"
+                        :labels="bucketLabels" :colors="colors"></apexchart>
                 </BaseCard>
             </div>
             <div class="

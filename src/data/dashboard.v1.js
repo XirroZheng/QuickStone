@@ -66,88 +66,22 @@ export const dashboardOne = {
         },
     },
 }
+export const baseColors = [
+    '#a2ecf8ff',
+    '#00d9ffff',
+    '#2df800ff',
+    '#f4e400ff',
+    '#f50000ff',
+]
 
-// export const dashboardOne = {
-//   series: [
-//     {
-//       name: 'Net Profit',
-//       data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-//     },
-//     {
-//       name: 'Revenue',
-//       data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-//     },
-//   ],
-//   chartOptions: {
-//     colors: ['rgba(196, 181, 253, 1)', '#8b5cf6'],
-//   chart: {
-//     type: 'bar',
-//     height: 350,
-//     toolbar: {
-//       show: false,
-//     },
-//   },
-//   plotOptions: {
-//     bar: {
-//       horizontal: false,
-//       columnWidth: '55%',
-//       borderRadius: 80,
-//     },
-//   },
-//   dataLabels: {
-//     enabled: false,
-//   },
-//   stroke: {
-//     show: true,
-//     width: 2,
-//     colors: ['transparent'],
-//   },
-//   xaxis: {
-//     categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-//   },
-//   fill: {
-//     opacity: 1,
-//   },
-//   tooltip: {
-//     y: {
-//       formatter: function (val) {
-//         return '$ ' + val + ' thousands';
-//       },
-//     },
-//   },
-//   }
-
-// }
-
-export const dashboardTwo = {
-    series: [44, 55, 13, 43, 22],
+export const dashboardBuckets = {
     chartOptions: {
-        fill: {
-            colors: ['#EDE9FE', '#DDD6FE', '#8B5CF6', '#C4B5FD', '#A78BFA'],
+        chart: { type: 'pie', height: 350 },
+        dataLabels: { enabled: false },
+        legend: { show: false },
+        tooltip: {
+            y: { formatter: (val) => `${val}字节` },
         },
-        chart: {
-            height: 350,
-            type: 'pie',
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        legend: {
-            show: false,
-        },
-        // responsive: [
-        //   {
-        //     breakpoint: 480,
-        //     options: {
-        //       chart: {
-        //         // width: 200
-        //       },
-        //       legend: {
-        //         show: false,
-        //       },
-        //     },
-        //   },
-        // ],
     },
 }
 
