@@ -82,7 +82,7 @@ export const dashboardBuckets = {
         tooltip: {
             y: {
                 formatter: (val) => {
-                    return `${label}: ${val}字节`
+                    return `${val}字节`
                 },
             },
         },
