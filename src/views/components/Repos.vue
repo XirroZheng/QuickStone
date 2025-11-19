@@ -85,11 +85,11 @@ const handleInBucketClick = (b) => {
 
 const handleDeleteClick = (obj) => {
   request({
-    url: '/storage/object/delete',
+    url: '/storage/delete',
     method: 'POST',
     data: {
       user_name: username,
-      bucket_name: currentBucket.value.bucket_name,
+      bucket_name: currentBucket.value.bucket.bucket_name,
       object_name: obj.key
     },
   }).then((res) => {

@@ -53,7 +53,8 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, emit } from 'vue'
+import request from '../../utils/axios';
 const emit = defineEmits(['close']);
 
 const bucketName = ref('')
