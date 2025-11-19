@@ -132,7 +132,7 @@ const handleDownloadClick = (obj) => {
 
 <template>
   <div class>
-    <button v-if="isInBucket" class="text-white px-4 py-1 rounded-md whitespace-nowrap" @click="isInBucket = false">
+    <button v-if="isInBucket" class="text-white px-2 py-1 rounded-md whitespace-nowrap" @click="isInBucket = false">
       返回
     </button>
     <div v-if="isInBucket">当前桶：{{ currentBucket.bucket.bucket_name }}</div>
@@ -169,12 +169,6 @@ const handleDownloadClick = (obj) => {
           </div>
         </BaseCard>
       </div>
-    </div>
-    <div class="mt-5 flex justify-center">
-      <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap"
-        @click="showNewBucketModal = true">
-        创建一个新桶
-      </button>
     </div>
     <div class="grid grid-cols-12 gap-5" v-if="isInBucket">
       <div v-for="(obj, index) in currentBucket.objects" :key="index" class="
@@ -214,7 +208,11 @@ const handleDownloadClick = (obj) => {
 
     </div>
   </div>
-
+  <div class="mt-5 flex justify-center">
+    <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="showNewBucketModal = true">
+      创建一个新桶
+    </button>
+  </div>
 
   <NewBucket v-if="showNewBucketModal" @close="showNewBucketModal = false" />
   <Setting v-if="showSettingModal" @close="showSettingModal = false" />
