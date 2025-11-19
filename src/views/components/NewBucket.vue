@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, emit } from 'vue'
+import { ref, defineEmits } from 'vue'
 import request from '../../utils/axios';
 const emit = defineEmits(['close']);
 
