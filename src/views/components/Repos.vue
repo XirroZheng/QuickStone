@@ -102,16 +102,17 @@ const handleDownloadClick = (obj) => {
   request({
     url: '/storage/download',
     method: 'POST',
-    responseType: 'blob', // ⬅⬅ 必须：接收二进制
+    responseType: 'blob',
     data: {
       target_user_name: username,
       bucket_name: currentBucket.value.bucket.bucket_name,
       key: obj.key
     }
   }).then((res) => {
-    const blob = new Blob([res.data]);
+    const type = "." + obj.object_type
+    const blob = new Blob([res.data], { type });
 
-    const fileName = obj.key;
+    const fileName = obj.key + type;
 
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
