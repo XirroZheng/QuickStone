@@ -53,6 +53,7 @@ const getUserAudit = () => {
             bucketSeries.value = Object.values(bucketUsage.value)
             bucketLabels.value = Object.keys(bucketUsage.value)
             colors.value = getColorsByBucketUsage(bucketUsage.value)
+            
         }
     }).catch((err) => {
         console.log(err)

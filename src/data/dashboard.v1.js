@@ -81,8 +81,10 @@ export const dashboardBuckets = {
         legend: { show: false },
         tooltip: {
             y: {
-                formatter: (val) => {
-                    return `${val}字节`
+                formatter: (val, opts) => {
+                    // 获取对应的 label
+                    const label = opts.w.config.labels[opts.seriesIndex]
+                    return `${label}: ${val}字节`
                 },
             },
         },
