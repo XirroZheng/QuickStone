@@ -132,7 +132,7 @@ const handleDownloadClick = (obj) => {
 
 <template>
   <div v-if="isInBucket">
-    <button class="text-white px-2 py-1 rounded-md whitespace-nowrap" @click="isInBucket = false">
+    <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="showNewBucketModal = true">
       返回
     </button>
     <div>当前桶：{{ currentBucket.bucket.bucket_name }}</div>
