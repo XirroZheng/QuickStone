@@ -208,7 +208,7 @@ const handleDownloadClick = (obj) => {
 
     </div>
   </div>
-  <div class="mt-5 flex justify-center">
+  <div v-if="!isInBucket" class="mt-5 flex justify-center">
     <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="showNewBucketModal = true">
       创建一个新桶
     </button>
