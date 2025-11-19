@@ -88,7 +88,7 @@ const handleDeleteClick = (obj) => {
     url: '/storage/delete',
     method: 'POST',
     data: {
-      user_name: username,
+      target_user_name: username,
       bucket_name: currentBucket.value.bucket.bucket_name,
       object_name: obj.key
     },
