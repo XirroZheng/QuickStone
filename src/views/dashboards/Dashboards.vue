@@ -47,12 +47,12 @@ const getUserAudit = () => {
         }
     }).then((res) => {
         if (res.data.status_code === 0) {
-            bucketUsage = res.data.bucket_usage
-            bucketCount = Object.keys(bucketUsage).length
-            usedSpace = res.data.storage_used
-            bucketSeries = Object.values(bucketUsage)
-            bucketLabels = Object.keys(bucketUsage)
-            colors = getColorsByBucketUsage(bucketUsage)
+            bucketUsage.value = res.data.bucket_usage
+            bucketCount.value = Object.keys(bucketUsage.value).length
+            usedSpace.value = res.data.storage_used
+            bucketSeries.value = Object.values(bucketUsage.value)
+            bucketLabels.value = Object.keys(bucketUsage.value)
+            colors.value = getColorsByBucketUsage(bucketUsage.value)
         }
     }).catch((err) => {
         console.log(err)
