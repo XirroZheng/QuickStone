@@ -94,8 +94,33 @@ const handleDeleteClick = (obj) => {
   })
 }
 const handleDownloadClick = (obj) => {
-  window.open(`/storage/object/download?user_name=${username}&bucket_name=${currentBucket.value.bucket_name}&object_name=${obj.key}`)
-}
+  request({
+    url: '/storage/download',
+    method: 'POST',
+    responseType: 'blob', // ⬅⬅ 必须：接收二进制
+    data: {
+      target_user_name: username,
+      bucket_name: currentBucket.value.bucket.bucket_name,
+      key: obj.key
+    }
+  }).then((res) => {
+    const blob = new Blob([res.data]);
+
+    const fileName = obj.key;
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+    document.body.removeChild(link);
+  }).catch((err) => {
+    console.error("下载失败：", err);
+  });
+};
+
 
 </script>
 
@@ -136,10 +161,9 @@ const handleDownloadClick = (obj) => {
       </div>
     </div>
     <div class="mt-5 flex justify-center">
-      <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap"
-        @click="">
+      <!-- <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="">
         创建一个新桶
-      </button>
+      </button> -->
     </div>
     <div class="grid grid-cols-12 gap-5" v-if="isInBucket">
       <div v-for="(obj, index) in currentBucket" :key="index" class="
@@ -167,5 +191,5 @@ const handleDownloadClick = (obj) => {
   </div>
 
 
-  <NewBucket />
+  <!-- <NewBucket /> -->
 </template>
