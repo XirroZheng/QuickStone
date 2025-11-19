@@ -6,6 +6,30 @@ import {
     splineAreaWidgetThree,
 } from '@/data/dashboard.v1.js'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
+
+const userAudit = ref({
+    bucketCount: 0,
+    usedSpace: 0,
+})
+const getUserAudit = () => {
+    request({
+        url: '/user/audit',
+        method: 'POST',
+        data: {
+            user_name: localStorage.getItem('username'),
+        }
+    }).then((res) => {
+        if (res.data.status_code === 0) {
+            userAudit.value.bucketCount = res.data.data.bucket_num
+            userAudit.value.usedSpace = res.data.data.storage_used
+        }
+    }).catch((err) => {
+        console.log(err)
+    })
+}
+
+
+
 </script>
 
 <template>
@@ -21,10 +45,10 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                 ">
                 <BaseCard>
                     <div class="flex align-center">
-                        <i class="i-Add-User text-6xl text-purple-200"></i>
+                        <i class="i-Checkout-Basket text-6xl text-purple-200"></i>
                         <div class="m-auto">
                             <p class="text-gray-400">桶数量</p>
-                            <p class="text-xl text-primary">205</p>
+                            <p class="text-xl text-primary">{{ bucketCount }}</p>
                         </div>
                     </div>
                 </BaseCard>
@@ -40,8 +64,8 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                     <div class="flex align-center">
                         <i class="i-Financial text-6xl text-purple-200"></i>
                         <div class="m-auto">
-                            <p class="text-gray-400">Sales</p>
-                            <p class="text-xl text-primary">$4021</p>
+                            <p class="text-gray-400">已使用空间</p>
+                            <p class="text-xl text-primary">{{ usedSpace }}</p>
                         </div>
                     </div>
                 </BaseCard>
@@ -55,9 +79,9 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                 ">
                 <BaseCard>
                     <div class="flex align-center">
-                        <i class="i-Checkout-Basket text-6xl text-purple-200"></i>
+                        <i class="i-Add-User text-6xl text-purple-200"></i>
                         <div class="m-auto">
-                            <p class="text-gray-400">Orders</p>
+                            <p class="text-gray-400">好友</p>
                             <p class="text-xl text-primary">$80</p>
                         </div>
                     </div>
@@ -74,22 +98,22 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                     <div class="flex align-center">
                         <i class="i-Money-2 text-6xl text-purple-200"></i>
                         <div class="m-auto">
-                            <p class="text-gray-400">Expenses</p>
-                            <p class="text-xl text-primary">$1200</p>
+                            <p class="text-gray-400">本月花费</p>
+                            <p class="text-xl text-primary">{{ monthCost }}</p>
                         </div>
                     </div>
                 </BaseCard>
             </div>
             <div class="col-span-12 xl:col-span-8 md:col-span-6">
                 <BaseCard>
-                    <h4 class="card-title mb-4">This Year Sales</h4>
+                    <h4 class="card-title mb-4">花费记录</h4>
                     <apexchart type="bar" height="255" :options="dashboardOne.chartOptions"
                         :series="dashboardOne.series"></apexchart>
                 </BaseCard>
             </div>
             <div class="col-span-12 xl:col-span-4 md:col-span-6">
                 <BaseCard>
-                    <h4 class="card-title mb-4">Sales By Countries</h4>
+                    <h4 class="card-title mb-4">空间使用情况</h4>
                     <apexchart type="pie" height="290" :options="dashboardTwo.chartOptions"
                         :series="dashboardTwo.series"></apexchart>
                 </BaseCard>
@@ -103,7 +127,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                 ">
                 <BaseCard noPadding class="overflow-hidden">
                     <div class="p-5">
-                        <div class="text-gray-500">Last Month Sales</div>
+                        <div class="text-gray-500">上传高峰</div>
                         <p class="text-primary text-2xl m-0">$40250</p>
                     </div>
                     <div id="basicArea-chart">
@@ -122,7 +146,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                 ">
                 <BaseCard noPadding class="overflow-hidden">
                     <div class="p-5">
-                        <div class="text-gray-500">Last Week Sales</div>
+                        <div class="text-gray-500">下载高峰</div>
                         <p class="text-warning text-2xl m-0">$10250</p>
                     </div>
                     <div id="basicArea-chart">
@@ -134,7 +158,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
 
             <div class="col-span-12 xl:col-span-6 lg:col-span-6">
                 <BaseCard>
-                    <div class="card-title mb-4">Top Selling Products</div>
+                    <div class="card-title mb-4">热点数据</div>
 
                     <div class="flex flex-col items-center mb-4 md:flex-row">
                         <img class="avatar-md mr-2 rounded w-20 h-20" src="/images/products/headphone-4.jpg" alt="" />
@@ -169,18 +193,18 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                                 text-primary
                                 rounded-full
                                 hover:bg-primary hover:text-white
-                            ">View Details</BaseBtn>
+                            ">查看</BaseBtn>
                     </div>
                     <div class="flex flex-col items-center mb-4 md:flex-row">
                         <img class="avatar-md mr-2 rounded w-20 h-20" src="/images/products/headphone-4.jpg" alt="" />
                         <div class="flex-grow text-center md:text-left">
                             <h5>
                                 <router-link to="" class="text-gray-800 hover:text-primary">
-                                    Wireless Headphone E23
+                                    查看
                                 </router-link>
                             </h5>
                             <p class="text-gray-400 text-xs mb-3 md:mb-0">
-                                Lorem ipsum dolor sit amet consectetur.
+                                查看
                             </p>
                             <div class="
                                     flex
@@ -250,36 +274,6 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                     md:col-span-6
                     sm:col-span-6
                 ">
-                <BaseCard class="text-center">
-                    <img class="
-                            w-20
-                            h-20
-                            m-auto
-                            shadow-lg
-                            avatar-md
-                            rounded-full
-                        " src="/images/faces/2.jpg" alt="" />
-                    <p class="text-base mt-4">Jhon Doe</p>
-                    <p class="text-xs text-gray-400">Top Buyer</p>
-                    <p class="my-2 text-sm text-gray-500 mb-3">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Recusandae cumque.
-                    </p>
-                    <BaseBtn sm class="bg-primary text-white rounded-full">
-                        Contact Jessica
-                    </BaseBtn>
-                    <div class="mt-4">
-                        <router-link to="" class="mr-2 hover:text-primary">
-                            <i class="i-Linkedin-2 text-xs"></i>
-                        </router-link>
-                        <router-link to="" class="mr-2 hover:text-primary">
-                            <i class="i-Facebook-2 text-xs"></i>
-                        </router-link>
-                        <router-link to="" class="mr-2 hover:text-primary">
-                            <i class="i-Twitter text-xs"></i>
-                        </router-link>
-                    </div>
-                </BaseCard>
             </div>
             <div class="
                     col-span-12
@@ -288,126 +282,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue'
                     md:col-span-6
                     sm:col-span-6
                 ">
-                <BaseCard class="text-center">
-                    <img class="
-                            w-20
-                            h-20
-                            m-auto
-                            shadow-lg
-                            avatar-md
-                            rounded-full
-                        " src="/images/faces/9.jpg" alt="" />
-                    <p class="text-base mt-4">Jhon Doe</p>
-                    <p class="text-xs text-gray-400">Top Buyer</p>
-                    <p class="my-2 text-sm text-gray-500 mb-3">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Recusandae cumque.
-                    </p>
-                    <BaseBtn sm class="bg-primary text-white rounded-full">
-                        Contact Jessica
-                    </BaseBtn>
-                    <div class="mt-4">
-                        <router-link to="" class="mr-2 hover:text-primary">
-                            <i class="i-Linkedin-2 text-xs"></i>
-                        </router-link>
-                        <router-link to="" class="mr-2 hover:text-primary">
-                            <i class="i-Facebook-2 text-xs"></i>
-                        </router-link>
-                        <router-link to="" class="mr-2 hover:text-primary">
-                            <i class="i-Twitter text-xs"></i>
-                        </router-link>
-                    </div>
-                </BaseCard>
-            </div>
-            <div class="col-span-12 card xl:col-span-6 lg:col-span-12">
-                <BaseCard>
-                    <div class="flex justify-between p-4">
-                        <div class="card-title">User Activity</div>
-                        <span class="
-                                rounded-full
-                                flex
-                                items-center
-                                text-white
-                                bg-warning
-                                px-4
-                                text-xs
-                            ">Updated Daily</span>
-                    </div>
-                    <div class="divide-y divide-gray-200">
-                        <div class="p-3">
-                            <div class="flex justify-between">
-                                <div>
-                                    <p class="text-xs text-gray-400">
-                                        Pages / Visit
-                                    </p>
-                                    <p class="text-lg font-normal mb-0">2065</p>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-gray-400">
-                                        New / user
-                                    </p>
-                                    <p class="text-lg font-normal mb-0">465</p>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-gray-400">
-                                        Last week
-                                    </p>
-                                    <p class="text-lg font-normal mb-0">
-                                        23456
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-3">
-                            <div class="flex justify-between">
-                                <div>
-                                    <p class="text-xs text-gray-400">
-                                        Pages / Visit
-                                    </p>
-                                    <p class="text-lg font-normal mb-0">1829</p>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-gray-400">
-                                        New / user
-                                    </p>
-                                    <p class="text-lg font-normal mb-0">735</p>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-gray-400">
-                                        Last week
-                                    </p>
-                                    <p class="text-lg font-normal mb-0">
-                                        92565
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-3">
-                            <div class="flex justify-between">
-                                <div>
-                                    <p class="text-xs text-gray-400">
-                                        Pages / Visit
-                                    </p>
-                                    <p class="text-lg font-normal mb-0">3165</p>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-gray-400">
-                                        New / user
-                                    </p>
-                                    <p class="text-lg font-normal mb-0">165</p>
-                                </div>
-                                <div>
-                                    <p class="text-xs text-gray-400">
-                                        Last week
-                                    </p>
-                                    <p class="text-lg font-normal mb-0">
-                                        32165
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </BaseCard>
+
             </div>
             <div class="col-span-12">
             </div>
