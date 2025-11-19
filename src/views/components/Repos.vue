@@ -23,7 +23,10 @@ const object = ref({
   obejcts: []
 }
 )
-const currentBucket = ref()
+const currentBucket = ref({
+  bucket:"",
+  objects:[],
+})
 
 const getBuckets = async () => {
   request({
@@ -67,7 +70,9 @@ const handleInBucketClick = (b) => {
     },
   }).then((res) => {
     if (res.data.status_code === 0) {
-      currentBucket.value = res.data.objects
+      currentBucket.value.bucket = b;
+      currentBucket.value.objects = res.data.objects;
+      console.log(currentBucket.value)
       isInBucket.value = true
     }
   }).catch((err) => {
@@ -77,6 +82,7 @@ const handleInBucketClick = (b) => {
 }
 
 const handleDeleteClick = (obj) => {
+<<<<<<< HEAD
   request({
     url: '/storage/object/delete',
     method: 'POST',
@@ -121,6 +127,10 @@ const handleDownloadClick = (obj) => {
   });
 };
 
+=======
+  
+}
+>>>>>>> 8bd6573458ebaf4d36916e8289f6aa32ef35fa09
 
 </script>
 
@@ -166,7 +176,7 @@ const handleDownloadClick = (obj) => {
       </button> -->
     </div>
     <div class="grid grid-cols-12 gap-5" v-if="isInBucket">
-      <div v-for="(obj, index) in currentBucket" :key="index" class="
+      <div v-for="(obj, index) in currentBucket.objects" :key="index" class="
           col-span-12
           xl:col-span-12
           lg:col-span-12
