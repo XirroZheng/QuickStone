@@ -24,8 +24,8 @@ const object = ref({
 }
 )
 const currentBucket = ref({
-  bucket:"",
-  objects:[],
+  bucket: "",
+  objects: [],
 })
 
 const getBuckets = async () => {
@@ -82,7 +82,6 @@ const handleInBucketClick = (b) => {
 }
 
 const handleDeleteClick = (obj) => {
-<<<<<<< HEAD
   request({
     url: '/storage/object/delete',
     method: 'POST',
@@ -126,11 +125,6 @@ const handleDownloadClick = (obj) => {
     console.error("下载失败：", err);
   });
 };
-
-=======
-  
-}
->>>>>>> 8bd6573458ebaf4d36916e8289f6aa32ef35fa09
 
 </script>
 
