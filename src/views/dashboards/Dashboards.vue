@@ -6,6 +6,8 @@ import {
     splineAreaWidgetThree,
 } from '@/data/dashboard.v1.js'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
+import { ref } from 'vue'
+import request from '../../utils/axios'
 
 const userAudit = ref({
     bucketCount: 0,
@@ -27,7 +29,7 @@ const getUserAudit = () => {
         console.log(err)
     })
 }
-
+getUserAudit();
 
 
 </script>
@@ -82,7 +84,7 @@ const getUserAudit = () => {
                         <i class="i-Add-User text-6xl text-purple-200"></i>
                         <div class="m-auto">
                             <p class="text-gray-400">好友</p>
-                            <p class="text-xl text-primary">$80</p>
+                            <p class="text-xl text-primary">{{ friendCount }}</p>
                         </div>
                     </div>
                 </BaseCard>
