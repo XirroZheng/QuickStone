@@ -1,10 +1,10 @@
 <template>
   <!-- 弹窗遮罩 -->
-  <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <!-- 弹窗内容 -->
     <div class="bg-white rounded-lg shadow-lg w-96 p-6 relative">
       <!-- 关闭按钮 -->
-      <button @click="showModal = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+      <button @click="emit('close')" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
         ✕
       </button>
 
@@ -22,9 +22,9 @@
         <label class="block mb-1 text-gray-600">存储类型</label>
         <select v-model="storageType"
           class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-purple-400">
-          <option value="标准存储">标准存储</option>
-          <option value="低频存储">低频存储</option>
-          <option value="归档存储">归档存储</option>
+          <option value="standard">标准存储</option>
+          <option value="infrequent">低频存储</option>
+          <option value="archive">归档存储</option>
         </select>
       </div>
 
@@ -33,15 +33,15 @@
         <label class="block mb-1 text-gray-600">访问类型</label>
         <select v-model="aclType"
           class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-purple-400">
-          <option value="私有">私有</option>
-          <option value="公共读">公共读</option>
-          <option value="公共读写">公共读写</option>
+          <option value="private">私有</option>
+          <option value="public_read">公共读</option>
+          <option value="public">公共读写</option>
         </select>
       </div>
 
       <!-- 按钮 -->
       <div class="flex justify-end gap-3">
-        <button @click="showModal = false" class="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100">
+        <button @click="emit('close')" class="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100">
           取消
         </button>
         <button @click="handleSubmit" class="px-4 py-2 rounded bg-purple-500 text-white hover:bg-purple-600">
@@ -53,16 +53,12 @@
 </template>
 
 <script setup>
-import { ref, defineExpose } from 'vue'
-const showModal = ref(true);
-
-const props = defineProps({
-  visible: Boolean
-})
+import { ref, defineEmits } from 'vue'
+const emit = defineEmits(['close']);
 
 const bucketName = ref('')
-const storageType = ref('标准存储')
-const aclType = ref('私有')
+const storageType = ref('standard')
+const aclType = ref('private')
 
 const handleSubmit = () => {
   if (!bucketName.value) {
@@ -70,23 +66,25 @@ const handleSubmit = () => {
     return
   }
 
-  const newBucket = {
-    bucket_name: bucketName.value,
-    storage_type: storageType.value,
-    acl_type: aclType.value,
-    create_time: new Date().toLocaleString(),
+  request({
+    url: '/storage/bucket/create',
+    method: 'POST',
+    data: {
+      bucket_name: bucketName.value,
+      area: "default",
+      storage_type: storageType.value,
+      acl_type: aclType.value,
+    }
+  }).then(res => {
+    console.log('创建桶信息:', newBucket)
+    alert(`创建桶 "${bucketName.value}" 成功！`)
+
+    bucketName.value = ''
+    storageType.value = 'standard'
+    aclType.value = 'private'
+    emit('close')
   }
-
-  console.log('创建桶信息:', newBucket)
-  alert(`创建桶 "${bucketName.value}" 成功！`)
-
-  // 清空表单
-  bucketName.value = ''
-  storageType.value = '标准存储'
-  aclType.value = '私有'
-  showModal.value = false
-
-  // 如果有父组件需要回调，可用 emit
-  // emit('created', newBucket)
+  )
 }
+
 </script>

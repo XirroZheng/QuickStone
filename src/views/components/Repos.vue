@@ -10,6 +10,8 @@ const username = localStorage.getItem('username')
 const bucketList = ref([]);
 const isInBucket = ref(false)
 
+const showNewBucketModal = ref(false)
+
 const bucket = ref({
   "bucket_name": "",
   "area": "",
@@ -166,9 +168,10 @@ const handleDownloadClick = (obj) => {
       </div>
     </div>
     <div class="mt-5 flex justify-center">
-      <!-- <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="">
+      <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap"
+        @click="showNewBucketModal = true">
         创建一个新桶
-      </button> -->
+      </button>
     </div>
     <div class="grid grid-cols-12 gap-5" v-if="isInBucket">
       <div v-for="(obj, index) in currentBucket.objects" :key="index" class="
@@ -218,5 +221,5 @@ const handleDownloadClick = (obj) => {
   </div>
 
 
-  <!-- <NewBucket /> -->
+  <NewBucket v-if="showNewBucketModal" @close="showNewBucketModal = false" />
 </template>
