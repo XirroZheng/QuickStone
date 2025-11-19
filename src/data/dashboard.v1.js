@@ -80,7 +80,12 @@ export const dashboardBuckets = {
         dataLabels: { enabled: false },
         legend: { show: false },
         tooltip: {
-            y: { formatter: (val) => `${val}字节` },
+            y: {
+                formatter: (val, opts) => {
+                    const idx = opts.seriesIndex
+                    return `${labels[idx]}: ${val}字节`
+                },
+            },
         },
     },
 }

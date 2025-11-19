@@ -47,16 +47,6 @@ const routes = [
                         component: () =>
                             import('../views/components/Repos.vue'),
                     },
-                ],
-            },
-            {
-                path: '/components',
-                name: 'components',
-                component: () => import('../views/components/index.vue'),
-                meta: {
-                    title: 'Components',
-                },
-                children: [
                     {
                         path: 'upload/:bucket_name?',
                         name: 'upload',
@@ -77,6 +67,12 @@ const routes = [
                         path: 'account',
                         name: 'account',
                         component: () => import('../views/profile/Account.vue'),
+                    },
+                    {
+                        path: 'notification',
+                        name: 'notification',
+                        component: () =>
+                            import('../views/profile/Notification.vue'),
                     },
                 ],
             },

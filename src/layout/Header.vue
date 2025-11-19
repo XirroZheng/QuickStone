@@ -9,7 +9,6 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { useRouter } from 'vue-router'
 let store = useStore()
 const router = useRouter()
-const username = computed(() => store.getters['userInfo/getUserName'])
 
 const sideBarToggle = () => {
     let sidenav = store.state.largeSidebar.sidebarToggleProperties.isSideNavOpen
@@ -31,11 +30,8 @@ const handleSignOut = async () => {
 
         if (res.data.status_code == 0) {
             alert("退出成功！");
-            store.commit('userInfo/isLoggedIn', false)
-            store.commit('userInfo/setUserId', null)
-            store.commit('userInfo/setUserName', null)
-            store.commit('userInfo/setUserRole', null)
             localStorage.removeItem('token')
+            localStorage.removeItem('username')
             router.replace('/signIn');
         }
     } catch (error) {
@@ -123,7 +119,7 @@ const handleAccountSettingsClick = () => {
                         focus:outline-none
                     ">
                     <div class="">
-                        <MenuItem v-for="(item, index) in 4" :key="index" v-slot="{ active }">
+                        <!-- <MenuItem v-for="(item, index) in 4" :key="index" v-slot="{ active }">
                         <button :class="[
                             active
                                 ? 'bg-purple-500 text-white'
@@ -152,7 +148,7 @@ const handleAccountSettingsClick = () => {
                                 </div>
                             </div>
                         </button>
-                        </MenuItem>
+                        </MenuItem> -->
                     </div>
                 </MenuItems>
             </Menu>

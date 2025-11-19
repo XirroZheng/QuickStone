@@ -65,7 +65,7 @@ getUserAudit();
 
 <template>
     <div class="container mx-auto">
-        <Breadcrumbs parentTitle="Dashboard" />
+        <Breadcrumbs parentTitle="仪表盘" />
         <div class="grid grid-cols-12 gap-5">
             <div class="
                     col-span-12
@@ -159,7 +159,7 @@ getUserAudit();
                 <BaseCard noPadding class="overflow-hidden">
                     <div class="p-5">
                         <div class="text-gray-500">上传高峰</div>
-                        <p class="text-primary text-2xl m-0">$40250</p>
+                        <p class="text-primary text-2xl m-0">40250</p>
                     </div>
                     <div id="basicArea-chart">
                         <apexchart type="area" height="270" :options="splineAreaWidgetTwo.chartOptions"
@@ -178,7 +178,7 @@ getUserAudit();
                 <BaseCard noPadding class="overflow-hidden">
                     <div class="p-5">
                         <div class="text-gray-500">下载高峰</div>
-                        <p class="text-warning text-2xl m-0">$10250</p>
+                        <p class="text-warning text-2xl m-0">10250</p>
                     </div>
                     <div id="basicArea-chart">
                         <apexchart type="area" height="270" :options="splineAreaWidgetThree.chartOptions"
@@ -208,15 +208,6 @@ getUserAudit();
                                     mb-4
                                     md:justify-start md:mb-0
                                 ">
-                                <p class="text-primary text-sm mr-2">$450</p>
-                                <p class="
-                                        text-gray-400
-                                        line-through
-                                        text-sm
-                                        mr-2
-                                    ">
-                                    $500
-                                </p>
                             </div>
                         </div>
                         <BaseBtn sm class="
@@ -231,11 +222,11 @@ getUserAudit();
                         <div class="flex-grow text-center md:text-left">
                             <h5>
                                 <router-link to="" class="text-gray-800 hover:text-primary">
-                                    查看
+                                    123
                                 </router-link>
                             </h5>
                             <p class="text-gray-400 text-xs mb-3 md:mb-0">
-                                查看
+                                666
                             </p>
                             <div class="
                                     flex
@@ -243,15 +234,6 @@ getUserAudit();
                                     mb-4
                                     md:justify-start md:mb-0
                                 ">
-                                <p class="text-primary text-sm mr-2">$450</p>
-                                <p class="
-                                        text-gray-400
-                                        line-through
-                                        text-sm
-                                        mr-2
-                                    ">
-                                    $500
-                                </p>
                             </div>
                         </div>
                         <BaseBtn sm class="
@@ -259,42 +241,7 @@ getUserAudit();
                                 text-primary
                                 rounded-full
                                 hover:bg-primary hover:text-white
-                            ">View Details</BaseBtn>
-                    </div>
-                    <div class="flex flex-col items-center mb-4 md:flex-row">
-                        <img class="avatar-md mr-2 rounded w-20 h-20" src="/images/products/headphone-4.jpg" alt="" />
-                        <div class="flex-grow text-center md:text-left">
-                            <h5>
-                                <router-link to="" class="text-gray-800 hover:text-primary">
-                                    Wireless Headphone E23
-                                </router-link>
-                            </h5>
-                            <p class="text-gray-400 text-xs mb-3 md:mb-0">
-                                Lorem ipsum dolor sit amet consectetur.
-                            </p>
-                            <div class="
-                                    flex
-                                    justify-center
-                                    mb-4
-                                    md:justify-start md:mb-0
-                                ">
-                                <p class="text-primary text-sm mr-2">$450</p>
-                                <p class="
-                                        text-gray-400
-                                        line-through
-                                        text-sm
-                                        mr-2
-                                    ">
-                                    $500
-                                </p>
-                            </div>
-                        </div>
-                        <BaseBtn sm class="
-                                border border-primary
-                                text-primary
-                                rounded-full
-                                hover:bg-primary hover:text-white
-                            ">View Details</BaseBtn>
+                            ">查看</BaseBtn>
                     </div>
                 </BaseCard>
             </div>

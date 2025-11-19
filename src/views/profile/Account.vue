@@ -3,27 +3,65 @@ import Breadcrumb from '@/components/Breadcrumbs.vue'
 import { computed, ref } from 'vue'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import { useStore } from 'vuex'
+import request from '../../utils/axios'
 
-const store = useStore();
-const username = computed(() => store.getters['userInfo/getUserName']);
-const userid = computed(() => store.getters['userInfo/getUserId']);
+const username = localStorage.getItem('username')
 let categories = ref(['Timeline', 'About', 'Friends', 'Photos'])
+
+// 初始头像 URL，一般从后端接口获取
+const avatarUrl = ref('/images/faces/1.jpg')
+
+// 文件输入引用
+const fileInput = ref(null)
+
+function onChangeAvatar () {
+  fileInput.value.click()
+}
+
+function onFileSelected (event) {
+  const file = event.target.files[0]
+  if (!file) return
+
+  // 1️⃣ 本地预览
+  const reader = new FileReader()
+  reader.onload = e => {
+    avatarUrl.value = e.target.result
+  }
+  reader.readAsDataURL(file)
+
+  // 2️⃣ 上传到后端
+  const formData = new FormData()
+  formData.append('avatar', file)
+
+  request({
+    url: '/user/avatar',
+    method: 'POST',
+    data: formData
+  }).then(res => {
+    if (res.status_code === 0) {
+      // 上传成功，可以用返回的 URL 更新 avatarUrl
+      avatarUrl.value = res.avatar_url
+    } else {
+      alert('上传失败：' + res.status_msg)
+    }
+  }).catch(err => {
+    console.error('上传出错', err)
+  })
+}
+
 </script>
 
 <template>
 
   <div class="container mx-auto">
-    <Breadcrumb parentTitle='Profile' subParentTitle='ProfileV2' />
-
-
-
     <BaseCard noPadding class="user-profile overflow-hidden relative">
       <div class="header-cover"></div>
       <div class="flex justify-center z-10 -m-10">
-        <div class="text-center"><img class="relative z-1 w-20 h-20 m-auto rounded-full border-2 border-white"
-            src="/images/faces/1.jpg" />
+        <div class="text-center">
+          <img class="relative z-1 w-20 h-20 m-auto rounded-full border-2 border-white cursor-pointer" :src="avatarUrl"
+            @click="onChangeAvatar" alt="用户头像" />
           <p class="text-2xl">{{ username }}</p>
-          <p class="text-gray-600">{{ userid }}</p>
+          <input type="file" ref="fileInput" class="hidden" accept="image/*" @change="onFileSelected" />
         </div>
       </div>
       <div class="mt-20 p-5">

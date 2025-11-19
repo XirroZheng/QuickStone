@@ -1,6 +1,4 @@
 
-
-// Create a new store instance.
 const largeSidebar = {
 
     namespaced: true,
@@ -15,21 +13,12 @@ const largeSidebar = {
        
 
     },
-    // we cant use async code ---commit
+
     mutations: {
 
         toggleSidebarProperties: state =>
         (state.sidebarToggleProperties.isSideNavOpen = !state
           .sidebarToggleProperties.isSideNavOpen),
-    
-        
     },
-    
-    
-   
 }
-
-// const app = createApp({ /* your root component */ })
-
-
 export default largeSidebar;

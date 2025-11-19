@@ -62,10 +62,16 @@ let handleWindowResize = () => {
                                 <p>仓库</p>
                             </div>
                         </router-link>
-                        <router-link to="/components/upload" tag="li" class="nav-item">
+                        <router-link to="/repositories/upload" tag="li" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Upload text-3xl"></i>
                                 <p>上传</p>
+                            </div>
+                        </router-link>
+                        <router-link to="/profile/notification" class="nav-item">
+                            <div class="nav-item-hold">
+                                <i class="i-Check text-3xl"></i>
+                                <p>通知</p>
                             </div>
                         </router-link>
                         <router-link to="/profile/account" tag="li" class="nav-item">
