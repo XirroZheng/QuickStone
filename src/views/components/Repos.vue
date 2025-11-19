@@ -11,7 +11,7 @@ const username = localStorage.getItem('username')
 const bucketList = ref([]);
 const isInBucket = ref(false)
 
-const showNewBucketModal = ref(true)
+const showNewBucketModal = ref(false)
 const showSettingModal = ref(false)
 
 const bucket = ref({
@@ -73,7 +73,6 @@ const handleInBucketClick = (b) => {
     if (res.data.status_code === 0) {
       currentBucket.value.bucket = b;
       currentBucket.value.objects = res.data.objects;
-      console.log(currentBucket.value)
       isInBucket.value = true
     }
   }).catch((err) => {
@@ -132,6 +131,12 @@ const handleDownloadClick = (obj) => {
 
 
 <template>
+  <div class="flex justify-end">
+    <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="isInBucket = false">
+      返回
+    </button>
+    <div>当前桶：{{ currentBucket.value.bucket.bucket_name }}</div>
+  </div>
   <div class="container mx-auto">
     <div class="grid grid-cols-12 gap-5" v-if="!isInBucket">
       <div v-for="(b, index) in bucketList" :key="index" class="

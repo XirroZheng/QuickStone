@@ -62,6 +62,8 @@ const emit = defineEmits(['close']);
 const storageType = ref('standard')
 const aclType = ref('private')
 
+const bucket = ref({})
+
 const handleSubmit = () => {
 
   request({
@@ -77,8 +79,6 @@ const handleSubmit = () => {
 const handleDelete = () => {
   const ok = window.confirm(`确定要删除桶吗？`)
   if (!ok) return
-
-
   request({
     url: '/storage/bucket/delete',
     method: 'POST',
