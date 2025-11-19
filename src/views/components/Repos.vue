@@ -179,17 +179,39 @@ const handleDownloadClick = (obj) => {
           sm:col-span-12
         ">
         <BaseCard>
-          <div class="flex align-center">
-            <div class="m-auto">
-              <p class="text-purple-400 text-lg p-4">{{ obj.key }}</p>
-              <p class="text-gray-400">大小：{{ obj.size }}</p>
-              <p class="text-gray-400">创建时间：{{ obj.create_time }}</p>
-              <button class="bg-purple-300 text-white px-4 py-1 rounded-md "
-                @click="handleDownloadClick(obj)">下载</button>
-              <button class="bg-purple-300 text-white px-4 py-1 rounded-md " @click="handleDeleteClick(obj)">删除</button>
-            </div>
+          <div class="flex flex-row items-center gap-6 px-4 py-3">
+
+            <!-- 文件名 -->
+            <p class="text-purple-400 text-lg flex-shrink-0">
+              {{ obj.key }}
+            </p>
+
+            <!-- 大小 -->
+            <p class="text-gray-400 flex-shrink-0">
+              大小：{{ obj.size }}
+            </p>
+
+            <!-- 时间 -->
+            <p class="text-gray-400 flex-shrink-0">
+              创建时间：{{ obj.create_time }}
+            </p>
+
+            <!-- 占位自动撑开：把按钮推到右侧 -->
+            <div class="flex-grow"></div>
+
+            <!-- 下载按钮 -->
+            <button class="bg-purple-300 text-white px-4 py-1 rounded-md" @click="handleDownloadClick(obj)">
+              下载
+            </button>
+
+            <!-- 删除按钮 -->
+            <button class="bg-purple-300 text-white px-4 py-1 rounded-md" @click="handleDeleteClick(obj)">
+              删除
+            </button>
+
           </div>
         </BaseCard>
+
       </div>
 
     </div>
