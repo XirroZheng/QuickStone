@@ -131,11 +131,11 @@ const handleDownloadClick = (obj) => {
 
 
 <template>
-  <div class="flex justify-end">
-    <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="isInBucket = false">
+  <div class>
+    <button class="text-white px-4 py-1 rounded-md whitespace-nowrap" @click="isInBucket = false">
       返回
     </button>
-    <div>当前桶：{{ currentBucket.value.bucket.bucket_name }}</div>
+    <div>当前桶：{{ currentBucket.bucket.bucket_name }}</div>
   </div>
   <div class="container mx-auto">
     <div class="grid grid-cols-12 gap-5" v-if="!isInBucket">

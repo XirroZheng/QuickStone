@@ -83,7 +83,8 @@ export const dashboardBuckets = {
             y: {
                 formatter: (val, opts) => {
                     const idx = opts.seriesIndex
-                    return `${labels[idx]}: ${val}字节`
+
+                    return `${bucketLabels[idx]}: ${val}字节`
                 },
             },
         },
