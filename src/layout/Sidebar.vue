@@ -68,6 +68,13 @@ let handleWindowResize = () => {
                                 <p>上传</p>
                             </div>
                         </router-link>
+                        <router-link to="/profile/friends" class="nav-item">
+                            <div class="nav-item-hold">
+                                <i class="i-MaleFemale text-3xl"></i>
+                                <p>朋友</p>
+                            </div>
+                        </router-link>
+
                         <router-link to="/profile/notification" class="nav-item">
                             <div class="nav-item-hold">
                                 <i class="i-Check text-3xl"></i>

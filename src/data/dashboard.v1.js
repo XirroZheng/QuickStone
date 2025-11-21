@@ -77,12 +77,12 @@ export const baseColors = [
 export const dashboardBuckets = {
     chartOptions: {
         chart: { type: 'pie', height: 350 },
-        dataLabels: { enabled: true },
-        legend: { show: false },
+        dataLabels: { enabled: false },
+        legend: { show: true },
         tooltip: {
             y: {
                 formatter: (val) => {
-                    return `${val}字节`
+                    return val
                 },
             },
         },

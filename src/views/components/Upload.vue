@@ -1,4 +1,5 @@
 <script setup>
+import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import { ref } from 'vue'
 import request from '@/utils/axios'
 import { useRoute } from 'vue-router'
@@ -100,6 +101,7 @@ async function uploadFiles () {
 </script>
 
 <template>
+  <Breadcrumbs parentTitle="上传" />
   <BaseCard>
     <div class="p-4">
       <p class="text-purple-400 text-lg p-4 text-center">当前桶：{{ bucket_name }}</p>

@@ -1,5 +1,5 @@
 .<template>
-  <Breadcrumbs parentTitle="通知" />
+  <Breadcrumbs parentTitle="朋友" needSearch="true" />
   <div class="container mx-auto">
 
     <div class="grid grid-cols-12 gap-5">

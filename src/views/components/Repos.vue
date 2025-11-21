@@ -141,6 +141,7 @@ const handleSettingClick = (b) => {
 
 
 <template>
+  <Breadcrumbs parentTitle="存储库" needSearch="true" />
   <div v-if="isInBucket">
     <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="isInBucket = false">
       返回
@@ -222,6 +223,8 @@ const handleSettingClick = (b) => {
     <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="showNewBucketModal = true">
       创建一个新桶
     </button>
+    <button v-if="isInBucket" class="bg-purple-300 text-white px-4 py-1 rounded-md "
+      @click="handleUploadClick(b)">上传</button>
   </div>
 
   <NewBucket v-if="showNewBucketModal" @close="showNewBucketModal = false" />

@@ -74,6 +74,11 @@ const routes = [
                         component: () =>
                             import('../views/profile/Notification.vue'),
                     },
+                    {
+                        path: 'friends',
+                        name: 'friends',
+                        component: () => import('../views/profile/Friend.vue'),
+                    },
                 ],
             },
         ],
