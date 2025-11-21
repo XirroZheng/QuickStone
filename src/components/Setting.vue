@@ -11,24 +11,24 @@
       <h2 class="text-xl font-semibold mb-4 text-purple-500">设置</h2>
 
       <div class="mb-4">
-        <label class="block mb-1 text-gray-600">创建时间:</label>
+        <label class="block mb-1 text-gray-600">创建时间:{{ bucket.create_time }}</label>
       </div>
       <div class="mb-4">
         <label class="block mb-1 text-gray-600">拥有者:</label>
       </div>
       <div class="mb-4">
-        <label class="block mb-1 text-gray-600">当前用户权限:</label>
+        <label class="block mb-1 text-gray-600">当前用户权限:{{ bucket.acl_type }}</label>
       </div>
-      <div class="mb-4">
-        <label class="block mb-1 text-gray-600">存储类型</label>
+      <div v-if="username == bucket.owner" class="mb-4">
+        <label class="block mb-1 text-gray-600">存储类型:{{ bucket.storage_type }}</label>
         <select v-model="storageType"
           class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-purple-400">
-          <option value="standard">标准存储</option>
-          <option value="infrequent">低频存储</option>
-          <option value="archive">归档存储</option>
+          <option value="standard"> 标准存储 </option>
+          <option value="infrequent"> 低频存储 </option>
+          <option value="archive"> 归档存储 </option>
         </select>
       </div>
-      <div class="mb-6">
+      <div v-if="username == bucket.owner" class="mb-6">
         <label class="block mb-1 text-gray-600">访问类型</label>
         <select v-model="aclType"
           class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-purple-400">
@@ -40,7 +40,8 @@
 
 
       <div class="flex justify-end gap-3">
-        <button @click="handleDelete" class="px-4 py-2 rounded border hover:bg-red-100 bg-red-500 text-white">
+        <button v-if="username == bucket.owner" @click="handleDelete"
+          class="px-4 py-2 rounded border hover:bg-red-100 bg-red-500 text-white">
           删除桶
         </button>
         <button @click="emit('close')" class="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100">
@@ -62,8 +63,17 @@ const emit = defineEmits(['close']);
 const storageType = ref('standard')
 const aclType = ref('private')
 
-const bucket = ref({})
+const bucket = ref({
+  owner: "",
+  bucket_name: "",
+  area: "",
+  storage_type: "",
+  acl_type: "",
+  create_tim: "",
+  status: ""
+});
 
+const username = localStorage.getItem('username')
 const handleSubmit = () => {
 
   request({

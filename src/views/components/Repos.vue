@@ -15,6 +15,7 @@ const showNewBucketModal = ref(false)
 const showSettingModal = ref(false)
 
 const bucket = ref({
+  "owner": "",
   "bucket_name": "",
   "area": "",
   "storage_type": "",
@@ -26,11 +27,14 @@ const bucket = ref({
 const object = ref({
   obejcts: []
 }
+
 )
 const currentBucket = ref({
   bucket: "",
   objects: [],
 })
+
+const settingBucket = ref();
 
 const getBuckets = async () => {
   request({
@@ -61,6 +65,8 @@ const handleUploadClick = (b) => {
 }
 
 const handleInBucketClick = (b) => {
+
+  currentBucket.value = {};
 
   request({
     url: '/storage/bucket/objects',
@@ -127,15 +133,19 @@ const handleDownloadClick = (obj) => {
   });
 };
 
+const handleSettingClick = (b) => {
+  settingBucket.value = b;
+  showSettingModal.value = true;
+}
 </script>
 
 
 <template>
   <div v-if="isInBucket">
-    <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="showNewBucketModal = true">
+    <button class="bg-purple-300 text-white px-4 py-1 rounded-md whitespace-nowrap" @click="isInBucket = false">
       返回
     </button>
-    <div>当前桶：{{ currentBucket.bucket.bucket_name }}</div>
+    <span>当前桶：{{ currentBucket.bucket.bucket_name }}</span>
   </div>
   <div class="container mx-auto">
     <div class="grid grid-cols-12 gap-5" v-if="!isInBucket">
@@ -163,7 +173,7 @@ const handleDownloadClick = (obj) => {
               </div>
               <div class="p-4">
                 <button class="bg-purple-300 text-white px-4 py-1 rounded-md "
-                  @click="showSettingModal = true">设置</button>
+                  @click="handleSettingClick(b)">设置</button>
               </div>
             </div>
           </div>
@@ -215,5 +225,5 @@ const handleDownloadClick = (obj) => {
   </div>
 
   <NewBucket v-if="showNewBucketModal" @close="showNewBucketModal = false" />
-  <Setting v-if="showSettingModal" @close="showSettingModal = false" />
+  <Setting v-if="showSettingModal" @close="showSettingModal = false" :bucket="settingBucket" />
 </template>
