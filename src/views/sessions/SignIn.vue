@@ -3,6 +3,9 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import request from '@/utils/axios'
 import { useStore } from 'vuex'
+import { connectWS } from '@/utils/services'
+import { send } from 'vite'
+import { sendWS } from '../../utils/services'
 
 const router = useRouter()
 const username = ref('')
@@ -24,8 +27,14 @@ const handleSignIn = async () => {
         },
     }).then((res) => {
         if (res.data.status_code === 0) {
-            localStorage.setItem('username',username.value)
+            localStorage.setItem('username', username.value)
             localStorage.setItem('token', res.data.token)
+
+            connectWS({ url: 'ws://localhost:10001/notification/get' })
+            sendWS({
+                token: res.data.token
+            })
+
             router.replace('/')
         } else {
             console.error('登录失败:', res.data.status_msg)
