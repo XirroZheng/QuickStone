@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import request from '@/utils/axios'
 import { useStore } from 'vuex'
 import { connectWS } from '@/utils/services'
-import { send } from 'vite'
 import { sendWS } from '../../utils/services'
 
 const router = useRouter()
@@ -30,10 +29,7 @@ const handleSignIn = async () => {
             localStorage.setItem('username', username.value)
             localStorage.setItem('token', res.data.token)
 
-            connectWS({ url: 'ws://localhost:10001/notification/get' })
-            sendWS({
-                token: res.data.token
-            })
+            connectWS({ url: 'ws://localhost:10001/notification/get?token=' + res.data.token + '&user_name=' + username.value })
 
             router.replace('/')
         } else {
