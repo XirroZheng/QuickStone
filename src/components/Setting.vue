@@ -44,6 +44,10 @@
           class="px-4 py-2 rounded border hover:bg-red-100 bg-red-500 text-white">
           删除桶
         </button>
+        <button v-if="username == bucket.owner && bucket.acl_type != 'private'" @click="handleDelete"
+          class="px-4 py-2 rounded border hover:bg-red-100 bg-red-500 text-white">
+          生成访问密钥
+        </button>
         <button @click="emit('close')" class="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100">
           取消
         </button>

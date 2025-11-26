@@ -148,8 +148,8 @@ dashboardBuckets.chartOptions.colors = colors.value
             <div class="col-span-12 xl:col-span-4 md:col-span-6">
                 <BaseCard>
                     <h4 class="card-title mb-4">空间使用情况</h4>
-                    <!-- <apexchart type="pie" height="290" :options="dashboardBuckets.chartOptions" :series="bucketSeries"
-                        :labels="bucketLabels" :colors="colors"></apexchart> -->
+                    <apexchart type="pie" height="290" :options="dashboardBuckets.chartOptions" :series="bucketSeries">
+                    </apexchart>
                 </BaseCard>
             </div>
             <div class="
