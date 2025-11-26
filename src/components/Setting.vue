@@ -66,7 +66,14 @@ const emit = defineEmits(['close']);
 const storageType = ref('standard')
 const aclType = ref('private')
 
-const bucket = ref();
+const bucket = ref({
+  bucket_name: "",
+  area: "",
+  storage_type: "",
+  acl_type: "",
+  create_tim: "",
+  status: ""
+});
 
 const username = localStorage.getItem('username')
 const handleSubmit = () => {
