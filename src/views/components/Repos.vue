@@ -15,7 +15,6 @@ const showNewBucketModal = ref(false)
 const showSettingModal = ref(false)
 
 const bucket = ref({
-  "owner": "",
   "bucket_name": "",
   "area": "",
   "storage_type": "",

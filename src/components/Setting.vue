@@ -19,7 +19,7 @@
       <div class="mb-4">
         <label class="block mb-1 text-gray-600">当前用户权限:{{ bucket.acl_type }}</label>
       </div>
-      <div v-if="username == bucket.owner" class="mb-4">
+      <div class="mb-4">
         <label class="block mb-1 text-gray-600">存储类型:{{ bucket.storage_type }}</label>
         <select v-model="storageType"
           class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-purple-400">
@@ -28,7 +28,7 @@
           <option value="archive"> 归档存储 </option>
         </select>
       </div>
-      <div v-if="username == bucket.owner" class="mb-6">
+      <div class="mb-6">
         <label class="block mb-1 text-gray-600">访问类型</label>
         <select v-model="aclType"
           class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-purple-400">
@@ -40,11 +40,10 @@
 
 
       <div class="flex justify-end gap-3">
-        <button v-if="username == bucket.owner" @click="handleDelete"
-          class="px-4 py-2 rounded border hover:bg-red-100 bg-red-500 text-white">
+        <button @click="handleDelete" class="px-4 py-2 rounded border hover:bg-red-100 bg-red-500 text-white">
           删除桶
         </button>
-        <button v-if="username == bucket.owner && bucket.acl_type != 'private'" @click="handleDelete"
+        <button v-if="bucket.acl_type != 'private'" @click="handleDelete"
           class="px-4 py-2 rounded border hover:bg-red-100 bg-red-500 text-white">
           生成访问密钥
         </button>
@@ -67,15 +66,7 @@ const emit = defineEmits(['close']);
 const storageType = ref('standard')
 const aclType = ref('private')
 
-const bucket = ref({
-  owner: "",
-  bucket_name: "",
-  area: "",
-  storage_type: "",
-  acl_type: "",
-  create_tim: "",
-  status: ""
-});
+const bucket = ref();
 
 const username = localStorage.getItem('username')
 const handleSubmit = () => {
